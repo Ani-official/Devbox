@@ -10,7 +10,7 @@ export default function About() {
         Our mission is to make everyday developer tasks easier by providing accessible, no-login, web-based tools that you can use anytime, anywhere.
       </p>
       <h2 className="mt-6 text-2xl font-semibold">Contact</h2>
-      <p>If you have any suggestions or questions, reach out to us at <a href="mailto:contact@yourdomain.com" className="text-blue-600 underline">contact@yourdomain.com</a>.</p>
+      <p>If you have any suggestions or questions, reach out to us at <a href="mailto:service.devbox@gmail.com" className="text-blue-600 underline">service.devbox@gmail.com</a>.</p>
     </div>
   );
 }
