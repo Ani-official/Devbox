@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Editor, { loader } from "@monaco-editor/react";
 import type { OnChange } from "@monaco-editor/react";
 import { Copy, Check } from "lucide-react";
@@ -14,7 +14,6 @@ interface CodeEditorProps {
 }
 
 export default function CodeEditor({ value, onChange, readOnly, language="json" }: CodeEditorProps) {
-  const editorRef = useRef<any>(null);
   const [copied, setCopied] = useState(false);
 
   const handleEditorChange: OnChange = (val) => {
