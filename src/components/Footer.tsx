@@ -4,13 +4,16 @@ export default function Footer() {
   return (
     <footer className="w-full border-t bg-white dark:bg-gray-900 py-6 mt-8 text-gray-600 dark:text-gray-300 text-sm">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
+        {/* Left spacer */}
+        <div className="flex-1"></div>
+
         {/* Centered copyright */}
-        <span className="text-center w-full sm:w-auto mb-2 sm:mb-0">
+        <span className="flex-1 text-center">
           © {new Date().getFullYear()} DevBox. All rights reserved.
         </span>
 
-        {/* Right-aligned links on desktop, stacked below on mobile */}
-        <ul className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full sm:w-auto items-center sm:justify-end">
+        {/* Right-aligned links */}
+        <ul className="flex flex-1 justify-end gap-4 mt-2 sm:mt-0">
           <li>
             <Link to="/about" className="hover:text-blue-600 dark:hover:text-blue-400">
               About
