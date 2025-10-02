@@ -52,21 +52,43 @@ export default function SvgOptimizer() {
   return (
     <div>
       <Helmet>
-        <title>Online Regex Tester & Debugger | DevBox</title>
+        <title>SVG Optimizer | DevBox</title>
         <meta
           name="description"
-          content="Test and debug regular expressions online with real-time highlighting. Try different regex patterns, flags, and instantly see matches on your text."
+          content="Minify and optimize SVG files for better performance. Free online tool for designers and developers."
         />
-        <meta
-          property="og:title"
-          content="Online Regex Tester & Debugger | DevBox"
-        />
-        <meta
-          property="og:description"
-          content="Free regex tester with live highlighting. Validate patterns, test flags, and debug regular expressions easily online."
-        />
+        <meta name="keywords" content="SVG optimizer, SVG minifier, online SVG tool, optimize SVG" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="SVG Optimizer | DevBox" />
+        <meta property="og:description" content="Free online tool to optimize and minify SVG files for better performance." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devbox-gamma.vercel.app/workspace/svg-optimizer" />
+        <meta property="og:image" content="https://devbox-gamma.vercel.app/preview-svg.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="SVG Optimizer | DevBox" />
+        <meta name="twitter:description" content="Optimize SVG files online for faster loading and smaller file size." />
+        <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-svg.png" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/svg-optimizer" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "SVG Optimizer",
+            applicationCategory: "DeveloperTool",
+            operatingSystem: "Web",
+            description: "Online SVG optimizer to minify and improve performance of SVG files.",
+            url: "https://devbox-gamma.vercel.app/workspace/svg-optimizer"
+          })}
+        </script>
       </Helmet>
+
       <h2 className="text-2xl font-semibold mb-4">SVG Optimizer</h2>
 
       <div className="mb-4">
@@ -82,21 +104,19 @@ export default function SvgOptimizer() {
           <div className="flex border-b mb-2">
             <button
               onClick={() => setActiveTab("preview")}
-              className={`px-4 py-2 text-lg font-semibold transition ${
-                activeTab === "preview"
+              className={`px-4 py-2 text-lg font-semibold transition ${activeTab === "preview"
                   ? "text-blue-500 border-b-2 border-blue-600"
                   : "text-gray-400"
-              }`}
+                }`}
             >
               Preview
             </button>
             <button
               onClick={() => setActiveTab("code")}
-              className={`px-4 py-2 text-lg font-semibold transition ${
-                activeTab === "code"
+              className={`px-4 py-2 text-lg font-semibold transition ${activeTab === "code"
                   ? "text-blue-500 border-b-2 border-blue-600"
                   : "text-gray-400"
-              }`}
+                }`}
             >
               Optimized SVG Code
             </button>

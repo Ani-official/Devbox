@@ -45,17 +45,17 @@ export default function JsonFormatter() {
         <meta property="og:title" content="JSON Formatter & Beautifier | DevBox" />
         <meta property="og:description" content="Easily format and validate JSON data online. Share formatted JSON with a unique URL. Perfect for developers and API debugging." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/workspace/json-formatter" />
-        <meta property="og:image" content="https://yourdomain.com/preview-json.png" />
+        <meta property="og:url" content="https://devbox-gamma.vercel.app/workspace/json-formatter" />
+        <meta property="og:image" content="https://devbox-gamma.vercel.app/preview-json.png" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="JSON Formatter & Beautifier | DevBox" />
         <meta name="twitter:description" content="Free online JSON formatter and beautifier. Validate, format, and share JSON instantly with DevBox." />
-        <meta name="twitter:image" content="https://yourdomain.com/preview-json.png" />
+        <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-json.png" />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://yourdomain.com/workspace/json-formatter" />
+        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/json-formatter" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
@@ -66,7 +66,7 @@ export default function JsonFormatter() {
             applicationCategory: "DeveloperTool",
             operatingSystem: "Web",
             description: "Online JSON formatter and validator to beautify and validate JSON instantly.",
-            url: "https://yourdomain.com/workspace/json-formatter"
+            url: "https://devbox-gamma.vercel.app/workspace/json-formatter"
           })}
         </script>
       </Helmet>

@@ -59,18 +59,43 @@ function CopyableValue({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <Helmet>
-        <title>Color Converter | HEX, RGB, HSL Online Tool</title>
+        <title>Color Converter | DevBox</title>
         <meta
           name="description"
-          content="Free online color converter tool. Instantly convert HEX colors to RGB and HSL formats, copy values easily, and preview colors."
+          content="Convert between HEX, RGB, HSL, and other color formats instantly. Free online tool for designers and developers."
         />
-        <meta property="og:title" content="Color Converter | HEX, RGB, HSL Tool" />
-        <meta
-          property="og:description"
-          content="Convert HEX to RGB and HSL with ease using this free online color converter. Copy values instantly and preview colors live."
-        />
+        <meta name="keywords" content="color converter, HEX to RGB, RGB to HSL, online color tool, color formats" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Color Converter | DevBox" />
+        <meta property="og:description" content="Online tool to convert colors between HEX, RGB, HSL, and more." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devbox-gamma.vercel.app/workspace/color-converter" />
+        <meta property="og:image" content="https://devbox-gamma.vercel.app/preview-color.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Color Converter | DevBox" />
+        <meta name="twitter:description" content="Convert colors easily online. HEX, RGB, HSL, and more." />
+        <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-color.png" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/color-converter" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Color Converter",
+            applicationCategory: "DeveloperTool",
+            operatingSystem: "Web",
+            description: "Online color converter for HEX, RGB, HSL, and other formats.",
+            url: "https://devbox-gamma.vercel.app/workspace/color-converter"
+          })}
+        </script>
       </Helmet>
+
       <div className="flex items-center justify-between bg-muted px-3 py-2 rounded-lg">
         <span className="text-sm font-mono">
           {label}: {value}

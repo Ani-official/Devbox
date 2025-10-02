@@ -40,9 +40,8 @@ function curlToFetch(curl: string): string {
   // Build fetch string
   return `fetch("${url}", {
   method: "${method}",
-  headers: ${JSON.stringify(headers, null, 2)}${
-    body ? `,\n  body: ${JSON.stringify(body)}` : ""
-  }
+  headers: ${JSON.stringify(headers, null, 2)}${body ? `,\n  body: ${JSON.stringify(body)}` : ""
+    }
 })
   .then(res => res.json())
   .then(console.log)
@@ -141,21 +140,43 @@ export default function CurlConverter() {
   return (
     <div>
       <Helmet>
-        <title>cURL to Fetch & Axios Converter | DevBox</title>
+        <title>cURL to Fetch/Axios Converter | DevBox</title>
         <meta
           name="description"
-          content="Convert any cURL command into Fetch API or Axios code instantly. Free online cURL to JavaScript converter for developers."
+          content="Convert cURL commands into Fetch or Axios code instantly. Test APIs and generate JavaScript code effortlessly."
         />
-        <meta
-          property="og:title"
-          content="cURL to Fetch & Axios Converter | DevBox"
-        />
-        <meta
-          property="og:description"
-          content="Easily convert cURL commands into Fetch or Axios JavaScript snippets. Perfect for developers working with APIs."
-        />
+        <meta name="keywords" content="cURL converter, fetch converter, axios converter, API testing, online curl tool" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="cURL to Fetch/Axios Converter | DevBox" />
+        <meta property="og:description" content="Free online tool to convert cURL commands to Fetch or Axios code for API testing." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devbox-gamma.vercel.app/workspace/curl-converter" />
+        <meta property="og:image" content="https://devbox-gamma.vercel.app/preview-curl.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="cURL to Fetch/Axios Converter | DevBox" />
+        <meta name="twitter:description" content="Convert cURL commands into Fetch or Axios code online. Perfect for developers testing APIs." />
+        <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-curl.png" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/curl-converter" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "cURL Converter",
+            applicationCategory: "DeveloperTool",
+            operatingSystem: "Web",
+            description: "Online cURL to Fetch/Axios converter to quickly transform commands into JavaScript code.",
+            url: "https://devbox-gamma.vercel.app/workspace/curl-converter"
+          })}
+        </script>
       </Helmet>
+
 
       <h2 className="text-2xl font-semibold mb-4">cURL Converter</h2>
 
@@ -171,21 +192,19 @@ export default function CurlConverter() {
       <div className="flex border-b mb-2">
         <button
           onClick={() => setActiveTab("fetch")}
-          className={`px-4 py-2 text-lg font-semibold transition ${
-            activeTab === "fetch"
+          className={`px-4 py-2 text-lg font-semibold transition ${activeTab === "fetch"
               ? "text-blue-500 border-b-2 border-blue-600"
               : "text-gray-400"
-          }`}
+            }`}
         >
           Fetch
         </button>
         <button
           onClick={() => setActiveTab("axios")}
-          className={`px-4 py-2 text-lg font-semibold transition ${
-            activeTab === "axios"
+          className={`px-4 py-2 text-lg font-semibold transition ${activeTab === "axios"
               ? "text-blue-500 border-b-2 border-blue-600"
               : "text-gray-400"
-          }`}
+            }`}
         >
           Axios
         </button>
@@ -195,7 +214,7 @@ export default function CurlConverter() {
         <label className="font-semibold">{activeTab} Output</label>
         <CodeEditor
           value={activeTab === "fetch" ? fetchOutput : axiosOutput}
-          onChange={() => {}}
+          onChange={() => { }}
           readOnly
           language="javascript"
         />

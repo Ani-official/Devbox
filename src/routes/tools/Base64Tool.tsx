@@ -45,18 +45,43 @@ export default function Base64Tool() {
   return (
     <div>
       <Helmet>
-        <title>Base64 Encoder / Decoder Tool | DevBox</title>
+        <title>Base64 Encoder/Decoder | DevBox</title>
         <meta
           name="description"
-          content="Encode or decode any text to/from Base64 instantly with our free online Base64 tool. Share encoded content easily."
+          content="Encode and decode Base64 strings quickly and safely. Free online tool for developers."
         />
-        <meta property="og:title" content="Base64 Encoder / Decoder Tool | DevBox" />
-        <meta
-          property="og:description"
-          content="Encode or decode any text to/from Base64 instantly with our free online Base64 tool. Share encoded content easily."
-        />
+        <meta name="keywords" content="Base64 encoder, Base64 decoder, online Base64 tool, encode decode Base64" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Base64 Encoder/Decoder | DevBox" />
+        <meta property="og:description" content="Free online Base64 encoder and decoder. Encode or decode strings safely." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devbox-gamma.vercel.app/workspace/base64-tool" />
+        <meta property="og:image" content="https://devbox-gamma.vercel.app/preview-base64.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Base64 Encoder/Decoder | DevBox" />
+        <meta name="twitter:description" content="Encode and decode Base64 strings online with DevBox's free tool." />
+        <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-base64.png" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/base64-tool" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Base64 Tool",
+            applicationCategory: "DeveloperTool",
+            operatingSystem: "Web",
+            description: "Online Base64 encoder and decoder for strings and data.",
+            url: "https://devbox-gamma.vercel.app/workspace/base64-tool"
+          })}
+        </script>
       </Helmet>
+
       <h2 className="text-2xl font-semibold mb-4">Base64 Encoder / Decoder</h2>
 
       {/* Responsive editors: stack on small screens, side-by-side on md+ */}

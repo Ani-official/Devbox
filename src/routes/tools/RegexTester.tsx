@@ -29,11 +29,10 @@ export default function RegexTester() {
   }, [pattern, flags, text]);
 
   const handleCopyLink = () => {
-    const url = `${window.location.origin}${
-      window.location.pathname
-    }?pattern=${encodeURIComponent(pattern)}&flags=${encodeURIComponent(
-      flags
-    )}&text=${encodeURIComponent(text)}`;
+    const url = `${window.location.origin}${window.location.pathname
+      }?pattern=${encodeURIComponent(pattern)}&flags=${encodeURIComponent(
+        flags
+      )}&text=${encodeURIComponent(text)}`;
     navigator.clipboard.writeText(url);
     alert("Link copied to clipboard!");
   };
@@ -41,21 +40,43 @@ export default function RegexTester() {
   return (
     <div>
       <Helmet>
-        <title>Online Regex Tester & Debugger | DevBox</title>
+        <title>Regex Tester & Debugger | DevBox</title>
         <meta
           name="description"
-          content="Test and debug regular expressions online with real-time highlighting. Try different regex patterns, flags, and instantly see matches on your text."
+          content="Test and debug regular expressions online with live highlighting. Validate patterns, test flags, and instantly see matches."
         />
-        <meta
-          property="og:title"
-          content="Online Regex Tester & Debugger | DevBox"
-        />
-        <meta
-          property="og:description"
-          content="Free regex tester with live highlighting. Validate patterns, test flags, and debug regular expressions easily online."
-        />
+        <meta name="keywords" content="regex tester, regular expression tester, regex debugger, online regex tool" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Regex Tester & Debugger | DevBox" />
+        <meta property="og:description" content="Free online regex tester with live highlighting. Test patterns and flags, debug regular expressions easily." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devbox-gamma.vercel.app/workspace/regex-tester" />
+        <meta property="og:image" content="https://devbox-gamma.vercel.app/preview-regex.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Regex Tester & Debugger | DevBox" />
+        <meta name="twitter:description" content="Test and debug regular expressions online with live highlighting. Free tool for developers." />
+        <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-regex.png" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/regex-tester" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Regex Tester",
+            applicationCategory: "DeveloperTool",
+            operatingSystem: "Web",
+            description: "Online regex tester and debugger with live highlighting to test and debug regular expressions.",
+            url: "https://devbox-gamma.vercel.app/workspace/regex-tester"
+          })}
+        </script>
       </Helmet>
+
       <h2 className="text-2xl font-semibold mb-4">Regex Tester</h2>
       <div className="space-y-4">
         <div className="flex gap-2">
