@@ -3,8 +3,8 @@ import Home from "./routes/Home";
 import Workspace from "./routes/Workspace";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import About from "./pages/About";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+import About from "./routes/About";
+import PrivacyPolicy from "./routes/PrivacyPolicy";
 
 function App() {
   return (
