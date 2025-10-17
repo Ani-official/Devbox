@@ -58,44 +58,6 @@ function CopyableValue({ label, value }: { label: string; value: string }) {
 
   return (
     <div>
-      <Helmet>
-        <title>Color Converter | DevBox</title>
-        <meta
-          name="description"
-          content="Convert between HEX, RGB, HSL, and other color formats instantly. Free online tool for designers and developers."
-        />
-        <meta name="keywords" content="color converter, HEX to RGB, RGB to HSL, online color tool, color formats" />
-
-        {/* Open Graph */}
-        <meta property="og:title" content="Color Converter | DevBox" />
-        <meta property="og:description" content="Online tool to convert colors between HEX, RGB, HSL, and more." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devbox-gamma.vercel.app/workspace/color-converter" />
-        <meta property="og:image" content="https://devbox-gamma.vercel.app/preview-color.png" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Color Converter | DevBox" />
-        <meta name="twitter:description" content="Convert colors easily online. HEX, RGB, HSL, and more." />
-        <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-color.png" />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/color-converter" />
-
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            name: "Color Converter",
-            applicationCategory: "DeveloperTool",
-            operatingSystem: "Web",
-            description: "Online color converter for HEX, RGB, HSL, and other formats.",
-            url: "https://devbox-gamma.vercel.app/workspace/color-converter"
-          })}
-        </script>
-      </Helmet>
-
       <div className="flex items-center justify-between bg-muted px-3 py-2 rounded-lg">
         <span className="text-sm font-mono">
           {label}: {value}
@@ -117,12 +79,76 @@ export default function ColorConverter() {
   const [color, setColor] = useToolState("color-converter", "#ff0000");
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">Color Converter</h2>
-      <Card className="w-full max-w-lg mx-auto">
+    <div className="max-w-4xl mx-auto px-4 py-6">
+      <Helmet>
+        <title>Color Converter | DevBox</title>
+        <meta
+          name="description"
+          content="Convert colors between HEX, RGB, HSL, and other formats instantly. Free online tool for designers and developers."
+        />
+        <meta
+          name="keywords"
+          content="color converter, HEX to RGB, RGB to HSL, online color tool, color formats"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Color Converter | DevBox" />
+        <meta
+          property="og:description"
+          content="Online tool to convert colors between HEX, RGB, HSL, and more."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://devbox-gamma.vercel.app/workspace/color-converter"
+        />
+        <meta
+          property="og:image"
+          content="https://devbox-gamma.vercel.app/preview-color.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Color Converter | DevBox" />
+        <meta
+          name="twitter:description"
+          content="Convert colors easily online. HEX, RGB, HSL, and more."
+        />
+        <meta
+          name="twitter:image"
+          content="https://devbox-gamma.vercel.app/preview-color.png"
+        />
+
+        {/* Canonical */}
+        <link
+          rel="canonical"
+          href="https://devbox-gamma.vercel.app/workspace/color-converter"
+        />
+      </Helmet>
+
+      <h1 className="text-3xl font-bold mb-4">Color Converter</h1>
+
+      {/* Short description */}
+      <p className="mb-4 text-gray-700">
+        Quickly convert between <strong>HEX</strong>, <strong>RGB</strong>, and{" "}
+        <strong>HSL</strong> color formats. This tool is part of DevBox, a suite
+        of handy developer utilities designed to simplify your workflow.
+      </p>
+
+      {/* Examples section */}
+      <div className="bg-gray-50 p-4 rounded-lg mb-6">
+        <h2 className="font-semibold mb-2">Why use this tool?</h2>
+        <ul className="list-disc list-inside text-gray-700">
+          <li>Get color codes ready for CSS, JavaScript, or design tools.</li>
+          <li>Ensure your website colors are consistent across formats.</li>
+          <li>Quickly pick colors and copy them for projects in Figma, Photoshop, or Illustrator.</li>
+        </ul>
+      </div>
+
+      {/* Main tool card */}
+      <Card className="w-full max-w-lg mx-auto mb-6">
         <CardContent className="p-4 space-y-4">
           <div className="flex items-center gap-4">
-            {/* Text input for hex */}
             <Input
               type="text"
               value={color}
@@ -130,8 +156,6 @@ export default function ColorConverter() {
               placeholder="#RRGGBB"
               className="flex-1"
             />
-
-            {/* Native color picker */}
             <input
               type="color"
               value={color}
@@ -146,8 +170,54 @@ export default function ColorConverter() {
             <CopyableValue label="HSL" value={hexToHsl(color)} />
           </div>
         </CardContent>
-
       </Card>
+
+      {/* Additional tips */}
+      <div className="bg-gray-50 p-4 rounded-lg">
+        <h2 className="font-semibold mb-2">Tips for Developers:</h2>
+        <ul className="list-disc list-inside text-gray-700">
+          <li>Use HSL for smooth color transitions in CSS animations.</li>
+          <li>Check color contrast for accessibility using HEX or RGB values.</li>
+          <li>Combine this tool with other DevBox utilities like Gradient Generator or Palette Picker for faster workflow.</li>
+        </ul>
+      </div>
+
+      {/* Related Tools Section */}
+      <section className="mt-8">
+        <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
+          Related Tools
+        </h2>
+        <p className="mb-2 text-gray-700 dark:text-gray-300">
+          Check out other handy tools in DevBox to make your development workflow faster and easier:
+        </p>
+        <ul className="list-disc pl-5 text-blue-600 dark:text-blue-400 space-y-1">
+          <li>
+            <a href="/workspace/json-formatter" className="hover:underline">
+              JSON Formatter
+            </a>
+          </li>
+          <li>
+            <a href="/workspace/regex-tester" className="hover:underline">
+              Regex Tester
+            </a>
+          </li>
+          <li>
+            <a href="/workspace/curl-converter" className="hover:underline">
+              Curl Converter
+            </a>
+          </li>
+          <li>
+            <a href="/workspace/svg-optimizer" className="hover:underline">
+              SVG Optimizer
+            </a>
+          </li>
+          <li>
+            <a href="/workspace/base64-tool" className="hover:underline">
+              Base64 Encoder/Decoder
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }

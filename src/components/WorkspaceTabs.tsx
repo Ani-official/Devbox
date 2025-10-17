@@ -11,7 +11,7 @@ export default function WorkspaceTabs() {
   ];
 
   return (
-    <div className="flex gap-3 border-b mb-4 overflow-x-auto">
+    <div className="max-w-4xl mx-auto flex gap-3 border-b mb-4 overflow-x-auto">
       {tabs.map((tab) => (
         <NavLink
           key={tab.path}
