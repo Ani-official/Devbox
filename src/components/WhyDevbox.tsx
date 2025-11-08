@@ -1,17 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import CodeEditor from "../components/Editor"; // adjust path if needed
+import CodeEditor from "../components/Editor"; 
 import { Play, Repeat } from "lucide-react";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
 import {
   dracula,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-/**
- * WhyDevBoxAdvanced.tsx
- * - Alternating rows + mini live demos
- * - Animations: blobs, morph, typing, transform
- */
 
 export default function WhyDevBoxAdvanced() {
   return (
