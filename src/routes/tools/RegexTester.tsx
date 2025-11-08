@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Share } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { Card } from "@/components/ui/card";
 
 export default function RegexTester() {
   const [pattern, setPattern] = useToolState("regex-pattern", "", "pattern");
@@ -20,8 +21,9 @@ export default function RegexTester() {
       const result = text.replace(
         regex,
         (match) =>
-          `<mark class="bg-yellow-200 dark:bg-yellow-700">${match}</mark>`
+          `<span class="bg-yellow-200 dark:bg-yellow-200 text-black rounded-sm transition duration-200">${match}</span>`
       );
+
       setHighlighted(result);
     } catch {
       setHighlighted(text); // fallback if invalid regex
@@ -29,15 +31,17 @@ export default function RegexTester() {
   }, [pattern, flags, text]);
 
   const handleCopyLink = () => {
-    const url = `${window.location.origin}${window.location.pathname}?pattern=${encodeURIComponent(
-      pattern
-    )}&flags=${encodeURIComponent(flags)}&text=${encodeURIComponent(text)}`;
+    const url = `${window.location.origin}${
+      window.location.pathname
+    }?pattern=${encodeURIComponent(pattern)}&flags=${encodeURIComponent(
+      flags
+    )}&text=${encodeURIComponent(text)}`;
     navigator.clipboard.writeText(url);
     alert("Link copied to clipboard!");
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 py-6">
       <Helmet>
         <title>Regex Tester & Debugger | DevBox</title>
         <meta
@@ -99,49 +103,50 @@ export default function RegexTester() {
       </Helmet>
 
       <h2 className="text-2xl font-semibold mb-4">Regex Tester</h2>
-
       <div className="space-y-4">
-        <div className="flex gap-2 flex-wrap">
-          <div className="flex-1 min-w-[200px]">
-            <Label htmlFor="regex-pattern">Pattern</Label>
-            <Input
-              id="regex-pattern"
-              placeholder="Enter regex pattern"
-              value={pattern}
-              onChange={(e) => setPattern(e.target.value)}
-              className="mt-2"
+        <Card className="shadow-sm space-y-3 p-4">
+          <div className="flex gap-2 flex-wrap">
+            <div className="flex-1 min-w-[200px]">
+              <Label htmlFor="regex-pattern">Pattern</Label>
+              <Input
+                id="regex-pattern"
+                placeholder="Enter regex pattern"
+                value={pattern}
+                onChange={(e) => setPattern(e.target.value)}
+                className="mt-2"
+              />
+            </div>
+            <div className="w-1/4 min-w-[100px]">
+              <Label htmlFor="regex-flags">Flags</Label>
+              <Input
+                id="regex-flags"
+                placeholder="g, i, m..."
+                value={flags}
+                onChange={(e) => setFlags(e.target.value)}
+                className="mt-2"
+              />
+            </div>
+          </div>
+
+          <div>
+            <Label htmlFor="regex-text">Text</Label>
+            <Textarea
+              id="regex-text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Enter text here"
+              className="h-40 mt-2"
             />
           </div>
-          <div className="w-1/4 min-w-[100px]">
-            <Label htmlFor="regex-flags">Flags</Label>
-            <Input
-              id="regex-flags"
-              placeholder="g, i, m..."
-              value={flags}
-              onChange={(e) => setFlags(e.target.value)}
-              className="mt-2"
+
+          <div className="p-4 border rounded text-gray-700 dark:text-gray-200 ">
+            <Label>Matches</Label>
+            <div
+              className="mt-2 p-3 rounded-md border whitespace-pre-wrap font-mono bg-white/5 dark:bg-black/10"
+              dangerouslySetInnerHTML={{ __html: highlighted }}
             />
           </div>
-        </div>
-
-        <div>
-          <Label htmlFor="regex-text">Text</Label>
-          <Textarea
-            id="regex-text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Enter text here"
-            className="h-40 mt-2"
-          />
-        </div>
-
-        <div className="p-4 border rounded bg-gray-50 dark:bg-gray-900">
-          <Label>Matches</Label>
-          <div
-            className="mt-2 whitespace-pre-wrap"
-            dangerouslySetInnerHTML={{ __html: highlighted }}
-          />
-        </div>
+        </Card>
 
         <Button
           onClick={handleCopyLink}
@@ -155,38 +160,6 @@ export default function RegexTester() {
       </div>
 
       {/* --- Explore More Tools Section --- */}
-      <section className="mt-10 prose dark:prose-invert max-w-none">
-        <h2>Explore More DevBox Tools</h2>
-        <p>Check out other free developer tools available on DevBox:</p>
-        <ul className="list-disc ml-5">
-          <li>
-            <a href="/workspace/json-formatter">
-              JSON Formatter & Beautifier
-            </a>{" "}
-            - Format and validate JSON easily.
-          </li>
-          <li>
-            <a href="/workspace/base64-tool">Base64 Encoder/Decoder</a> - Encode
-            or decode strings safely.
-          </li>
-          <li>
-            <a href="/workspace/curl-converter">cURL Converter</a> - Convert
-            cURL commands to Fetch or Axios.
-          </li>
-          <li>
-            <a href="/workspace/color-converter">Color Converter</a> - Convert
-            colors between HEX, RGB, HSL, etc.
-          </li>
-          <li>
-            <a href="/workspace/svg-optimizer">SVG Optimizer</a> - Optimize SVG
-            files for faster loading.
-          </li>
-        </ul>
-        <p>
-          These tools are completely free and designed to help developers save
-          time and improve productivity.
-        </p>
-      </section>
     </div>
   );
 }

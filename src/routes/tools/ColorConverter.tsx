@@ -79,7 +79,7 @@ export default function ColorConverter() {
   const [color, setColor] = useToolState("color-converter", "#ff0000");
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 py-6">
       <Helmet>
         <title>Color Converter | DevBox</title>
         <meta
@@ -129,21 +129,12 @@ export default function ColorConverter() {
       <h1 className="text-3xl font-bold mb-4">Color Converter</h1>
 
       {/* Short description */}
-      <p className="mb-4 text-gray-700">
+      <p className="mb-4 dark:text-gray-300">
         Quickly convert between <strong>HEX</strong>, <strong>RGB</strong>, and{" "}
         <strong>HSL</strong> color formats. This tool is part of DevBox, a suite
         of handy developer utilities designed to simplify your workflow.
       </p>
-
-      {/* Examples section */}
-      <div className="bg-gray-50 p-4 rounded-lg mb-6">
-        <h2 className="font-semibold mb-2">Why use this tool?</h2>
-        <ul className="list-disc list-inside text-gray-700">
-          <li>Get color codes ready for CSS, JavaScript, or design tools.</li>
-          <li>Ensure your website colors are consistent across formats.</li>
-          <li>Quickly pick colors and copy them for projects in Figma, Photoshop, or Illustrator.</li>
-        </ul>
-      </div>
+      
 
       {/* Main tool card */}
       <Card className="w-full max-w-lg mx-auto mb-6">
@@ -171,16 +162,6 @@ export default function ColorConverter() {
           </div>
         </CardContent>
       </Card>
-
-      {/* Additional tips */}
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h2 className="font-semibold mb-2">Tips for Developers:</h2>
-        <ul className="list-disc list-inside text-gray-700">
-          <li>Use HSL for smooth color transitions in CSS animations.</li>
-          <li>Check color contrast for accessibility using HEX or RGB values.</li>
-          <li>Combine this tool with other DevBox utilities like Gradient Generator or Palette Picker for faster workflow.</li>
-        </ul>
-      </div>
 
       {/* Related Tools Section */}
       <section className="mt-8">

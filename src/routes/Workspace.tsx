@@ -6,6 +6,8 @@ import CurlConverter from "./tools/CurlConverter";
 import Base64Tool from "./tools/Base64Tool";
 import ColorConverter from "./tools/ColorConverter";
 import SvgOptimizer from "./tools/SvgOptimizer";
+import JsonYamlConverter from "./tools/JsonYamlConverter";
+import JwtDecoder from "./tools/JwtDecoder";
 
 export default function Workspace() {
   return (
@@ -19,7 +21,8 @@ export default function Workspace() {
           <Route path="base64-tool" element={<Base64Tool />} />
           <Route path="color-converter" element={<ColorConverter />} />
           <Route path="svg-optimizer" element={<SvgOptimizer />} />
-
+          <Route path="json-yaml-converter" element={<JsonYamlConverter />} />
+          <Route path="jwt-decoder" element={<JwtDecoder />} />
         </Routes>
       </div>
     </div>

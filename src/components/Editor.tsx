@@ -50,7 +50,9 @@ export default function CodeEditor({ value, onChange, readOnly, language="json" 
                         
           fontSize: 14,
           wordWrap: "on",
+          scrollBeyondLastLine: false,
         }}
+        
       />
     </div>
   );

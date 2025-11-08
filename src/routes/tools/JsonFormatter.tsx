@@ -29,7 +29,7 @@ export default function JsonFormatter() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 py-6">
       {/* ✅ SEO + Meta Tags */}
       <Helmet>
         <title>JSON Formatter & Beautifier | DevBox</title>
@@ -105,11 +105,6 @@ export default function JsonFormatter() {
         <h1 className="text-3xl font-bold mb-2">
           Free Online JSON Formatter & Validator
         </h1>
-        <p className="text-gray-600 leading-relaxed">
-          Beautify and validate your JSON instantly using DevBox’s online JSON
-          formatter. Whether you’re debugging API responses or preparing JSON for
-          documentation, this tool helps you format and share your data with ease.
-        </p>
       </header>
 
       {/* ✅ Interactive Tool */}

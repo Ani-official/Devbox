@@ -1,24 +1,73 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Moon, Sun } from "lucide-react";
 
 export default function Navbar() {
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("theme") === "dark"
+  );
+
+  // Apply theme on mount and when darkMode changes
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
   return (
-    <header className="w-full border-b bg-white/70 backdrop-blur-sm shadow-sm">
+    <header className="w-full border-b bg-white/70 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm transition-colors">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo with text */}
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="32" viewBox="0 0 300 322"><path d="M131.5 21.3c-7.7 4.6-21 12.4-29.5 17.4-32 18.8-38.5 23-38.5 24.4 0 1.9 13.1 10.7 55.2 37l35.2 22 11.1-6.6c6.1-3.7 10.9-7.2 10.7-7.8-.5-1.5-18.1-13.6-42.2-28.9-10.4-6.6-19.2-12.2-19.4-12.5-.9-.7 2.4-3.1 17-12.6l14.7-9.5 32.3 18.5c17.8 10.3 33.3 18.8 34.4 19 1.2.3 6.9-2.6 14.8-7.3 10.3-6.3 12.5-8 11.5-9-.7-.7-11.2-7-23.3-14S189.7 36.5 185 33.7C156.9 17.3 149 13 147.3 13c-1 .1-8.1 3.8-15.8 8.3" className="fill-blue-800"/><path d="M57.3 100.3c-11.1 6.1-21.4 12.1-23 13.3l-2.8 2.1-.3 55.4c-.1 30.5.1 59.2.5 63.9l.8 8.5L51 254.1c10.2 5.8 35.1 20.2 55.4 31.9 20.2 11.7 37.7 21.5 38.7 21.7 1.6.5 43.2-23.3 100.6-57.4l14.3-8.5V116.1l-5.7-3.2c-3.2-1.8-6.5-3.2-7.5-3.2-1 .1-5.5 2.4-10.1 5.1-11 6.6-57.2 33.8-80 47.2l-10.8 6.3-3.6-1.7c-4.5-2.1-65-37-69.7-40.2-1.7-1.2-1.1-1.8 6.5-6.7 4.6-3 11.7-7.2 15.6-9.3 4-2.1 7.2-4.2 7-4.6C101.5 105 78.9 89 78 89c-.3 0-9.6 5.1-20.7 11.3m36.8 70.8c18.9 11 35 20.5 35.7 21.1 1.6 1.4 1.8 74.8.2 74.8-.6 0-6.1-2.9-12.3-6.4-18.5-10.6-56.2-32.7-56.8-33.4-.8-.8-2.3-76.2-1.6-76.2.3 0 15.9 9 34.8 20.1m137.1 17.1c.3 20.5.3 37.7.1 38.3-.2.5-6.3 4.4-13.6 8.6-24.1 13.9-47.9 28-51.6 30.4-1.9 1.4-4.1 2.5-4.7 2.5-.7 0-1.3-11.1-1.7-37.2-.6-34.6-.6-37.4 1.1-38.9.9-.9 15.7-9.9 32.7-19.9 17.1-10.1 31.9-18.9 33-19.6s2.5-1.3 3.1-1.3c.8-.1 1.3 10.4 1.6 37.1"className="fill-blue-800"/></svg>
-          <span className="text-xl font-bold text-blue-800">DevBox</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="32"
+            viewBox="0 0 300 322"
+          >
+            <path
+              d="M131.5 21.3c-7.7 4.6-21 12.4-29.5 17.4-32 18.8-38.5 23-38.5 24.4 0 1.9 13.1 10.7 55.2 37l35.2 22 11.1-6.6c6.1-3.7 10.9-7.2 10.7-7.8-.5-1.5-18.1-13.6-42.2-28.9-10.4-6.6-19.2-12.2-19.4-12.5-.9-.7 2.4-3.1 17-12.6l14.7-9.5 32.3 18.5c17.8 10.3 33.3 18.8 34.4 19 1.2.3 6.9-2.6 14.8-7.3 10.3-6.3 12.5-8 11.5-9-.7-.7-11.2-7-23.3-14S189.7 36.5 185 33.7C156.9 17.3 149 13 147.3 13c-1 .1-8.1 3.8-15.8 8.3"
+              className="fill-blue-800 dark:fill-blue-400"
+            />
+            <path
+              d="M57.3 100.3c-11.1 6.1-21.4 12.1-23 13.3l-2.8 2.1-.3 55.4c-.1 30.5.1 59.2.5 63.9l.8 8.5L51 254.1c10.2 5.8 35.1 20.2 55.4 31.9 20.2 11.7 37.7 21.5 38.7 21.7 1.6.5 43.2-23.3 100.6-57.4l14.3-8.5V116.1l-5.7-3.2c-3.2-1.8-6.5-3.2-7.5-3.2-1 .1-5.5 2.4-10.1 5.1-11 6.6-57.2 33.8-80 47.2l-10.8 6.3-3.6-1.7c-4.5-2.1-65-37-69.7-40.2-1.7-1.2-1.1-1.8 6.5-6.7 4.6-3 11.7-7.2 15.6-9.3 4-2.1 7.2-4.2 7-4.6C101.5 105 78.9 89 78 89c-.3 0-9.6 5.1-20.7 11.3m36.8 70.8c18.9 11 35 20.5 35.7 21.1 1.6 1.4 1.8 74.8.2 74.8-.6 0-6.1-2.9-12.3-6.4-18.5-10.6-56.2-32.7-56.8-33.4-.8-.8-2.3-76.2-1.6-76.2.3 0 15.9 9 34.8 20.1m137.1 17.1c.3 20.5.3 37.7.1 38.3-.2.5-6.3 4.4-13.6 8.6-24.1 13.9-47.9 28-51.6 30.4-1.9 1.4-4.1 2.5-4.7 2.5-.7 0-1.3-11.1-1.7-37.2-.6-34.6-.6-37.4 1.1-38.9.9-.9 15.7-9.9 32.7-19.9 17.1-10.1 31.9-18.9 33-19.6s2.5-1.3 3.1-1.3c.8-.1 1.3 10.4 1.6 37.1"
+              className="fill-blue-800 dark:fill-blue-400"
+            />
+          </svg>
+          <span className="text-xl font-bold text-blue-800 dark:text-blue-400">
+            DevBox
+          </span>
         </Link>
 
-        {/* Nav Links */}
-        <nav className="flex gap-6 text-gray-700">
-          <Link to="/" className="hover:text-blue-600">
+        {/* Nav Links + Dark Mode */}
+        <div className="flex items-center gap-6 text-gray-700 dark:text-gray-200">
+          <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">
             Home
           </Link>
-          <Link to="/workspace/json-formatter" className="hover:text-blue-600">
+          <Link
+            to="/workspace/json-formatter"
+            className="hover:text-blue-600 dark:hover:text-blue-400"
+          >
             Workspace
           </Link>
-        </nav>
+
+          {/* Dark mode toggle */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? (
+              <Sun className="w-5 h-5 text-yellow-400" />
+            ) : (
+              <Moon className="w-5 h-5 text-gray-800" />
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );

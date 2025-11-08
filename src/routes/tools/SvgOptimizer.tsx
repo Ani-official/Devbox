@@ -49,7 +49,7 @@ export default function SvgOptimizer() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 py-6">
       <Helmet>
         <title>SVG Optimizer | DevBox</title>
         <meta
