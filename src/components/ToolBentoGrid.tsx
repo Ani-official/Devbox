@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import CodeEditor from "../components/Editor"; // adjust path
+import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface Tool {
   title: string;
@@ -12,14 +12,19 @@ interface Tool {
   color: string;
 }
 
-export default function ToolBentoGrid({ tools }: { tools: Tool[] }) {
-  const [jsonInput, setJsonInput] = useState(`{
+const JSON_PREVIEW = `{
   "name": "DevBox",
   "type": "Utility Tool",
-  "features": ["JSON Formatter", "Regex Tester", "SVG Optimizer","cURL Converter", "Base64 Tool", "Color Converter"],
-  "website": "https://devbox-gamma.vercel.app",
+  "features": [
+    "JSON Formatter",
+    "Regex Tester",
+    "cURL Converter"
+  ],
   "license": "MIT"
-}`);
+}`;
+
+export default function ToolBentoGrid({ tools }: { tools: Tool[] }) {
+  const [jsonInput] = useState(JSON_PREVIEW);
 
   return (
     <section
@@ -38,12 +43,11 @@ export default function ToolBentoGrid({ tools }: { tools: Tool[] }) {
         const isJsonFormatter = tool.title.toLowerCase().includes("json formatter");
 
         return (
-          <motion.article
+          <article
             key={tool.title}
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 200, damping: 14 }}
-            className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${tool.color} 
-            border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all duration-500 ${spanClass}`}
+            className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${tool.color}
+            border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-xl
+            hover:scale-[1.03] transition-all duration-300 ease-out ${spanClass}`}
           >
             <div className="flex flex-col h-full p-6 relative z-10">
               <div className="flex items-center gap-3">
@@ -60,13 +64,15 @@ export default function ToolBentoGrid({ tools }: { tools: Tool[] }) {
               </p>
 
               {isJsonFormatter && (
-                <div className="mt-4 rounded-2xl overflow-hidden border border-gray-300 dark:border-gray-700">
-                  <CodeEditor
-                    value={jsonInput}
-                    onChange={setJsonInput}
-                    readOnly={true}
+                <div className="mt-4 rounded-2xl overflow-hidden border border-gray-300 dark:border-gray-700 text-xs">
+                  <SyntaxHighlighter
                     language="json"
-                  />
+                    style={dracula}
+                    wrapLongLines
+                    customStyle={{ margin: 0, fontSize: "11px", maxHeight: "120px", overflow: "hidden" }}
+                  >
+                    {jsonInput}
+                  </SyntaxHighlighter>
                 </div>
               )}
 
@@ -77,7 +83,7 @@ export default function ToolBentoGrid({ tools }: { tools: Tool[] }) {
                 Open Tool →
               </Link>
             </div>
-          </motion.article>
+          </article>
         );
       })}
     </section>

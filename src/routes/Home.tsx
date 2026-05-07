@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { Braces, Regex, Terminal, Binary, Palette, Image } from "lucide-react";
-import { motion } from "framer-motion";
 import ToolBentoGrid from "../components/ToolBentoGrid";
 import { Helmet } from "react-helmet-async";
 
@@ -95,12 +94,7 @@ export default function Home() {
       </Helmet>
 
       {/* Hero Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="text-center mb-16 max-w-3xl"
-      >
+      <div className="text-center mb-16 max-w-3xl animate-[fadeInUp_0.7s_ease-out_both]">
         <h1 className="text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white font-anton">
           All Your Developer Tools,{" "}
           <span className="text-blue-700 dark:text-blue-400">Unified</span>
@@ -109,7 +103,7 @@ export default function Home() {
           DevBox brings together essential developer utilities — JSON, regex,
           color, and more — in a single, beautifully crafted workspace.
         </p>
-      </motion.div>
+      </div>
 
       {/* Bento Grid */}
       <ToolBentoGrid tools={tools} />
