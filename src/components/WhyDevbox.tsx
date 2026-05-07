@@ -1,11 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import CodeEditor from "../components/Editor"; 
 import { Play, Repeat } from "lucide-react";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
-import {
-  dracula,
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 
 export default function WhyDevBoxAdvanced() {
@@ -181,15 +178,16 @@ function JsonMorphPreview() {
         initial={{ opacity: 1 }}
         animate={{ opacity: animating ? 0.5 : 1, scale: animating ? 0.997 : 1 }}
         transition={{ duration: 0.35 }}
-        className="rounded-lg overflow-hidden border bg-gray-900 dark:bg-[#0b1220] p-2"
+        className="rounded-lg overflow-hidden border"
       >
-        {/* Code editor (monaco) in read-only mode */}
-        <CodeEditor
-          value={formatted}
-          onChange={() => {}}
-          readOnly
+        <SyntaxHighlighter
           language="json"
-        />
+          style={dracula}
+          wrapLongLines
+          customStyle={{ margin: 0, borderRadius: "0.5rem", fontSize: "13px", minHeight: "160px" }}
+        >
+          {formatted}
+        </SyntaxHighlighter>
       </motion.div>
     </div>
   );
@@ -245,8 +243,9 @@ function RegexInteractive() {
     <div className="space-y-3">
       <div className="flex gap-2 items-center">
         <div className="flex-1">
-          <label className="text-xs text-gray-500">Pattern</label>
+          <label htmlFor="why-regex-pattern" className="text-xs text-gray-500">Pattern</label>
           <input
+            id="why-regex-pattern"
             value={pattern}
             onChange={(e) => setPattern(e.target.value)}
             className="w-full px-3 py-2 rounded-md border bg-white/5 dark:bg-black/10 text-sm"
@@ -254,8 +253,9 @@ function RegexInteractive() {
           />
         </div>
         <div className="w-24">
-          <label className="text-xs text-gray-500">Flags</label>
+          <label htmlFor="why-regex-flags" className="text-xs text-gray-500">Flags</label>
           <input
+            id="why-regex-flags"
             value={flags}
             onChange={(e) => setFlags(e.target.value)}
             className="w-full px-3 py-2 rounded-md border bg-white/5 dark:bg-black/10 text-sm"

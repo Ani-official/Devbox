@@ -164,22 +164,52 @@ export default function Base64Tool() {
         Share
       </Button>
 
-      {/* --- Related Tools --- */}
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-          Related Tools
-        </h2>
-        <ul className="list-disc pl-5 text-blue-600 dark:text-blue-400 space-y-1">
-          <li>
-            <a href="/workspace/json-formatter">JSON Formatter</a>
-          </li>
-          <li>
-            <a href="/workspace/regex-tester">Regex Tester</a>
-          </li>
-          <li>
-            <a href="/workspace/curl-converter">Curl Converter</a>
-          </li>
-        </ul>
+      {/* Informational Content */}
+      <section className="mt-10 space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">How to Use the Base64 Tool</h2>
+          <ol className="list-decimal ml-6 space-y-2">
+            <li>Type or paste text into the <strong>Input</strong> field on the left.</li>
+            <li>The <strong>Encoded (Base64)</strong> panel shows your input encoded as a Base64 string instantly.</li>
+            <li>The <strong>Decoded (UTF-8)</strong> panel shows the decoded text if you paste a valid Base64 string.</li>
+            <li>Click <strong>Try Example</strong> to load a sample input and see the tool in action.</li>
+            <li>Use <strong>Share</strong> to copy a link with your current input pre-filled.</li>
+          </ol>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">What is Base64?</h2>
+          <p>
+            Base64 is a binary-to-text encoding scheme that represents binary data using a set of 64 printable
+            ASCII characters (A–Z, a–z, 0–9, <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">+</code>, and <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">/</code>). It is widely used to safely
+            transmit binary data over systems that only support plain text, such as email (MIME), HTTP headers,
+            and JSON payloads.
+          </p>
+          <p className="mt-2">
+            Base64 encoding increases the size of the data by approximately 33%, but ensures that the content
+            survives transmission through text-only channels without corruption.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Common Use Cases</h2>
+          <ul className="list-disc ml-6 space-y-1">
+            <li>Encoding images or binary files to embed directly in HTML, CSS, or JSON.</li>
+            <li>Transmitting data in JWT tokens (the header and payload sections are Base64URL-encoded).</li>
+            <li>Encoding credentials in HTTP Basic Authentication headers.</li>
+            <li>Storing binary data in databases or configuration files that only support text.</li>
+            <li>Encoding email attachments in the MIME standard.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
+          <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
+            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter</a></li>
+            <li><a href="/workspace/jwt-decoder" className="hover:underline">JWT Decoder</a></li>
+            <li><a href="/workspace/curl-converter" className="hover:underline">cURL Converter</a></li>
+          </ul>
+        </div>
       </section>
     </div>
   );

@@ -66,7 +66,8 @@ function CopyableValue({ label, value }: { label: string; value: string }) {
           size="icon"
           variant="ghost"
           onClick={copyToClipboard}
-          title="Copy"
+          aria-label={`Copy ${label} value`}
+          title={`Copy ${label} value`}
         >
           <Copy className="h-4 w-4" />
         </Button>
@@ -140,18 +141,25 @@ export default function ColorConverter() {
       <Card className="w-full max-w-lg mx-auto mb-6">
         <CardContent className="p-4 space-y-4">
           <div className="flex items-center gap-4">
+            <label htmlFor="hex-input" className="sr-only">HEX color value</label>
             <Input
+              id="hex-input"
               type="text"
               value={color}
               onChange={(e) => setColor(e.target.value)}
               placeholder="#RRGGBB"
               className="flex-1"
+              aria-label="HEX color value"
             />
+            <label htmlFor="color-picker" className="sr-only">Color picker</label>
             <input
+              id="color-picker"
               type="color"
               value={color}
               onChange={(e) => setColor(e.target.value)}
               className="w-12 h-12 border rounded cursor-pointer"
+              aria-label="Color picker"
+              title="Pick a color"
             />
           </div>
 
@@ -163,41 +171,53 @@ export default function ColorConverter() {
         </CardContent>
       </Card>
 
-      {/* Related Tools Section */}
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-          Related Tools
-        </h2>
-        <p className="mb-2 text-gray-700 dark:text-gray-300">
-          Check out other handy tools in DevBox to make your development workflow faster and easier:
-        </p>
-        <ul className="list-disc pl-5 text-blue-600 dark:text-blue-400 space-y-1">
-          <li>
-            <a href="/workspace/json-formatter" className="hover:underline">
-              JSON Formatter
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/regex-tester" className="hover:underline">
-              Regex Tester
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/curl-converter" className="hover:underline">
-              Curl Converter
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/svg-optimizer" className="hover:underline">
-              SVG Optimizer
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/base64-tool" className="hover:underline">
-              Base64 Encoder/Decoder
-            </a>
-          </li>
-        </ul>
+      {/* Informational Content */}
+      <section className="mt-10 space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">How to Use the Color Converter</h2>
+          <ol className="list-decimal ml-6 space-y-2">
+            <li>Click the color picker or type a HEX color value directly into the input field.</li>
+            <li>The tool instantly shows the equivalent <strong>HEX</strong>, <strong>RGB</strong>, and <strong>HSL</strong> values.</li>
+            <li>Click the <strong>Copy</strong> icon next to any format to copy that value to your clipboard.</li>
+          </ol>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Color Format Comparison</h2>
+          <ul className="list-disc ml-6 space-y-2">
+            <li>
+              <strong>HEX</strong> — A 6-digit hexadecimal representation used widely in HTML and CSS.
+              Example: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">#3b82f6</code>
+            </li>
+            <li>
+              <strong>RGB</strong> — Specifies red, green, and blue channel intensities from 0 to 255.
+              Example: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">rgb(59, 130, 246)</code>
+            </li>
+            <li>
+              <strong>HSL</strong> — Hue (0–360°), Saturation (0–100%), and Lightness (0–100%). More
+              intuitive for designers when adjusting shades and tints.
+              Example: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">hsl(217, 91%, 60%)</code>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">When to Use Each Format</h2>
+          <ul className="list-disc ml-6 space-y-1">
+            <li>Use <strong>HEX</strong> for static design assets and when copy-pasting between design tools and code.</li>
+            <li>Use <strong>RGB</strong> when you need to manipulate color channels programmatically or apply opacity with <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">rgba()</code>.</li>
+            <li>Use <strong>HSL</strong> when building color palettes or theming systems — it's easier to create lighter/darker variants by adjusting lightness.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
+          <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
+            <li><a href="/workspace/svg-optimizer" className="hover:underline">SVG Optimizer</a></li>
+            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter</a></li>
+            <li><a href="/workspace/base64-tool" className="hover:underline">Base64 Encoder / Decoder</a></li>
+          </ul>
+        </div>
       </section>
     </div>
   );

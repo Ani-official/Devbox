@@ -110,10 +110,15 @@ export default function SvgOptimizer() {
         </script>
       </Helmet>
 
-      <h2 className="text-2xl font-semibold mb-4">SVG Optimizer</h2>
+      <header className="mb-6">
+        <h1 className="text-3xl font-bold mb-2">SVG Optimizer</h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          Paste your SVG markup below to remove bloat and minify it without losing visual quality.
+        </p>
+      </header>
 
       <div className="mb-4">
-        <label className="font-semibold">SVG Code</label>
+        <div className="font-semibold mb-1">SVG Code</div>
         <CodeEditor value={svgInput} onChange={setSvgInput} language="xml" />
       </div>
 
@@ -201,41 +206,54 @@ export default function SvgOptimizer() {
         Share
       </Button>
 
-      {/* Related Tools Section */}
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-          Related Tools
-        </h2>
-        <p className="mb-2 text-gray-700 dark:text-gray-300">
-          Check out other handy tools in DevBox to make your development workflow faster and easier:
-        </p>
-        <ul className="list-disc pl-5 text-blue-600 dark:text-blue-400 space-y-1">
-          <li>
-            <a href="/workspace/json-formatter" className="hover:underline">
-              JSON Formatter
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/regex-tester" className="hover:underline">
-              Regex Tester
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/color-converter" className="hover:underline">
-              Color Converter
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/curl-converter" className="hover:underline">
-              Curl Converter
-            </a>
-          </li>
-          <li>
-            <a href="/workspace/base64-tool" className="hover:underline">
-              Base64 Encoder/Decoder
-            </a>
-          </li>
-        </ul>
+      {/* Informational Content */}
+      <section className="mt-10 space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">How to Use the SVG Optimizer</h2>
+          <ol className="list-decimal ml-6 space-y-2">
+            <li>Paste your SVG markup into the input editor on the left.</li>
+            <li>Click <strong>Optimize</strong> to remove unnecessary metadata, comments, and redundant attributes.</li>
+            <li>Review the cleaned SVG code in the output panel on the right.</li>
+            <li>Click <strong>Copy</strong> to copy the optimized SVG to your clipboard.</li>
+            <li>Use <strong>Share</strong> to generate a link with your current SVG pre-filled.</li>
+          </ol>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">What Does SVG Optimization Do?</h2>
+          <p>
+            SVG files exported from design tools like Figma, Illustrator, or Inkscape often contain significant
+            bloat: editor metadata, unused definitions, redundant group wrappers, and verbose attribute formats.
+            Optimization strips this out while preserving the visual output.
+          </p>
+          <p className="mt-2">Common optimizations applied:</p>
+          <ul className="list-disc ml-6 mt-2 space-y-1">
+            <li>Removing XML declarations and editor-specific metadata (e.g., <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">{"<sodipodi:...>"}</code>).</li>
+            <li>Collapsing redundant <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">{"<g>"}</code> wrapper elements.</li>
+            <li>Stripping empty attributes and default values.</li>
+            <li>Removing developer comments and whitespace.</li>
+            <li>Shortening numeric precision in path coordinates.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Why Optimize SVGs?</h2>
+          <ul className="list-disc ml-6 space-y-1">
+            <li><strong>Faster page loads</strong> — smaller file sizes mean less data for browsers to download and parse.</li>
+            <li><strong>Cleaner code</strong> — optimized SVGs are easier to read and hand-edit if needed.</li>
+            <li><strong>Better performance</strong> — fewer DOM nodes in inline SVGs speed up browser rendering.</li>
+            <li><strong>Reduced storage</strong> — important when serving many icons or illustrations from a CDN.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
+          <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
+            <li><a href="/workspace/color-converter" className="hover:underline">Color Converter</a></li>
+            <li><a href="/workspace/base64-tool" className="hover:underline">Base64 Encoder / Decoder</a></li>
+            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter</a></li>
+          </ul>
+        </div>
       </section>
     </div>
   );

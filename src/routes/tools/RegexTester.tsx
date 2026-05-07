@@ -102,7 +102,12 @@ export default function RegexTester() {
         </script>
       </Helmet>
 
-      <h2 className="text-2xl font-semibold mb-4">Regex Tester</h2>
+      <header className="mb-6">
+        <h1 className="text-3xl font-bold mb-2">Regex Tester & Debugger</h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          Enter a regular expression and test text to see live match highlighting. Debug patterns instantly without writing any code.
+        </p>
+      </header>
       <div className="space-y-4">
         <Card className="shadow-sm space-y-3 p-4">
           <div className="flex gap-2 flex-wrap">
@@ -159,7 +164,51 @@ export default function RegexTester() {
         </Button>
       </div>
 
-      {/* --- Explore More Tools Section --- */}
+      {/* Informational Content */}
+      <section className="mt-10 space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">How to Use the Regex Tester</h2>
+          <ol className="list-decimal ml-6 space-y-2">
+            <li>Enter your regular expression pattern in the <strong>Pattern</strong> field (without leading/trailing slashes).</li>
+            <li>Set regex flags in the <strong>Flags</strong> field (e.g., <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">g</code> for global, <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">i</code> for case-insensitive).</li>
+            <li>Paste or type your test text in the <strong>Text</strong> area.</li>
+            <li>Matches are highlighted in yellow in real time as you type.</li>
+            <li>Click <strong>Share</strong> to copy a URL with your pattern, flags, and text pre-filled.</li>
+          </ol>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Regex Flags Explained</h2>
+          <ul className="list-disc ml-6 space-y-1">
+            <li><code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">g</code> — <strong>Global</strong>: find all matches, not just the first one.</li>
+            <li><code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">i</code> — <strong>Case-insensitive</strong>: match uppercase and lowercase letters equally.</li>
+            <li><code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">m</code> — <strong>Multiline</strong>: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">^</code> and <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">$</code> match start/end of each line, not just the whole string.</li>
+            <li><code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">s</code> — <strong>Dotall</strong>: makes <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">.</code> match newline characters too.</li>
+            <li><code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">u</code> — <strong>Unicode</strong>: enables full Unicode matching.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Common Regex Patterns</h2>
+          <ul className="list-disc ml-6 space-y-1">
+            <li>Email address: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-xs">[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{"{2,}"}</code></li>
+            <li>URL: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-xs">https?:\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:/~+#]*)?</code></li>
+            <li>IPv4 address: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-xs">(\d{"{1,3}"}\.){"{3}"}\d{"{1,3}"}</code></li>
+            <li>Date (YYYY-MM-DD): <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-xs">\d{"{4}"}-\d{"{2}"}-\d{"{2}"}</code></li>
+            <li>Hex color code: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-xs">#([a-fA-F0-9]{"{6}"}|[a-fA-F0-9]{"{3}"})</code></li>
+            <li>Phone number (US): <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-xs">(\+1[\s\-]?)?\(?\d{"{3}"}\)?[\s\-]?\d{"{3}"}[\s\-]?\d{"{4}"}</code></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
+          <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
+            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter</a></li>
+            <li><a href="/workspace/curl-converter" className="hover:underline">cURL Converter</a></li>
+            <li><a href="/workspace/jwt-decoder" className="hover:underline">JWT Decoder</a></li>
+          </ul>
+        </div>
+      </section>
     </div>
   );
 }

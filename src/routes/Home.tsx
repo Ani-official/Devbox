@@ -1,8 +1,10 @@
+import { lazy, Suspense } from "react";
 import { Braces, Regex, Terminal, Binary, Palette, Image } from "lucide-react";
 import { motion } from "framer-motion";
 import ToolBentoGrid from "../components/ToolBentoGrid";
 import { Helmet } from "react-helmet-async";
-import WhyDevBox from "../components/WhyDevbox";
+
+const WhyDevBox = lazy(() => import("../components/WhyDevbox"));
 
 type Tool = {
   title: string;
@@ -112,7 +114,9 @@ export default function Home() {
       {/* Bento Grid */}
       <ToolBentoGrid tools={tools} />
       <div className="mt-5 md:w-full">
-      <WhyDevBox />
+        <Suspense fallback={<div className="h-96" />}>
+          <WhyDevBox />
+        </Suspense>
       </div>
     </main>
   );

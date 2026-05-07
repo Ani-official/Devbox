@@ -185,9 +185,9 @@ export default function CurlConverter() {
       </Button>
 
       {/* Tips Section */}
-      <div className="bg-gray-50 p-4 rounded-lg mb-6">
-        <h2 className="font-semibold mb-2">Tips for Developers:</h2>
-        <ul className="list-disc list-inside text-gray-700">
+      <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6">
+        <h2 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">Tips for Developers:</h2>
+        <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
           <li>Use Fetch for lightweight front-end requests.</li>
           <li>Use Axios for advanced requests with interceptors or automatic JSON parsing.</li>
           <li>Verify headers and body are correctly converted for POST/PUT requests.</li>
