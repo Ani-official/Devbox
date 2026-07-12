@@ -6,7 +6,7 @@ import { Play, Repeat } from "lucide-react";
 export default function WhyDevBoxAdvanced() {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-20">
-      <h2 className="mb-10 text-center font-anton text-4xl font-extrabold md:text-5xl">
+      <h2 className="mb-10 text-center text-4xl font-black tracking-tight md:text-5xl">
         Why <span className="text-blue-600 dark:text-blue-400">DevBox?</span>
       </h2>
 

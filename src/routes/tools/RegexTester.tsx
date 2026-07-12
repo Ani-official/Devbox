@@ -154,7 +154,7 @@ export default function RegexTester() {
           onClick={handleCopyLink}
           variant="secondary"
           size="icon"
-          className="w-20 bg-blue-800 text-white hover:bg-blue-600"
+          className="w-20 bg-blue-600 text-white hover:bg-blue-700"
         >
           <Share />
           Share

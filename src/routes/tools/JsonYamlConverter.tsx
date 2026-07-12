@@ -150,7 +150,7 @@ export default function JsonYamlConverter() {
           <Button
             size="icon"
             onClick={handleConvert}
-            className="w-23 gap-2 bg-green-600 text-white hover:bg-green-700"
+            className="w-23 gap-2 bg-emerald-600 text-white hover:bg-emerald-700"
           >
             <Play className="w-4 h-4" /> Convert
           </Button>
@@ -159,7 +159,7 @@ export default function JsonYamlConverter() {
             onClick={handleCopyLink}
             variant="secondary"
             size="icon"
-            className="w-20 bg-blue-800 text-white hover:bg-blue-600"
+            className="w-20 bg-blue-600 text-white hover:bg-blue-700"
           >
             <Share className="h-4 w-4" />
             Share

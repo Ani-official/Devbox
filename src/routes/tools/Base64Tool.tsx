@@ -118,7 +118,7 @@ export default function Base64Tool() {
         <Button
           onClick={handleExample}
           variant="secondary"
-          className="bg-green-600 hover:bg-green-700 text-white"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white"
         >
           Try Example
         </Button>
@@ -155,7 +155,7 @@ export default function Base64Tool() {
         onClick={handleCopyLink}
         variant="secondary"
         size="icon"
-        className="w-20 bg-blue-800 text-white hover:bg-blue-600"
+        className="w-20 bg-blue-600 text-white hover:bg-blue-700"
       >
         <Share className="h-4 w-4" />
         Share

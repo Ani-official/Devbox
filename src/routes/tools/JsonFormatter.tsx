@@ -119,7 +119,7 @@ export default function JsonFormatter() {
             onClick={handleCopyLink}
             variant="secondary"
             size="icon"
-            className="flex h-10 w-auto items-center gap-2 bg-blue-700 px-4 py-2 text-white hover:bg-blue-600"
+            className="flex h-10 w-auto items-center gap-2 bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
           >
             <Share className="h-4 w-4" />
             Share

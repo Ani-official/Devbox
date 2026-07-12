@@ -183,7 +183,7 @@ export default function CurlConverter() {
         onClick={handleCopyLink}
         variant="secondary"
         size="icon"
-        className="w-20 bg-blue-800 text-white hover:bg-blue-600 mb-6"
+        className="w-20 bg-blue-600 text-white hover:bg-blue-700 mb-6"
       >
         <Share /> Share
       </Button>

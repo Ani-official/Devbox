@@ -215,7 +215,7 @@ export default function SvgOptimizer() {
         onClick={handleCopyLink}
         variant="secondary"
         size="icon"
-        className="w-20 bg-blue-800 text-white hover:bg-blue-600 mt-4"
+        className="w-20 bg-blue-600 text-white hover:bg-blue-700 mt-4"
       >
         <Share />
         Share
