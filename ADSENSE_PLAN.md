@@ -158,7 +158,7 @@ Only after Phases 0–2 are live and verified via `curl`. Request review in AdSe
 - [x] **Phase 0 — DONE.** Rewrote all self-referential/AdSense copy (Home, About, JsonFormatter, JwtDecoder, Contact, Editorial). No visible mentions of AdSense/SEO/crawlers remain (only the required Privacy disclosure + standard Terms clause).
 - [x] **Phase 1 — DONE.** Static prerendering via `vite-react-ssg`; every route now ships real HTML. Verified 18 prerendered pages with unique titles/meta and full body content, and 14/14 functional browser tests pass.
 - [x] **Phase 2 — DONE.** Content depth: rewrote the 3 existing guides to ~1,000–1,200 words each and added 5 new guides (JWT, Base64, color formats, JSON/YAML, SVG), all with worked examples, comparison tables, and an FAQ. Added a `/guides` hub page, `FAQPage` + `TechArticle` JSON-LD via a shared `GuideLayout`, and wired routes/nav/sitemap. 8 substantial guides total, all prerendered.
-- [ ] Phase 3 — custom domain; consent banner/CMP
+- [~] **Phase 3 — mostly done.** Cookie-consent banner with **Google Consent Mode v2** shipped (defaults denied before AdSense, Accept/Reject, persisted, footer "Cookie preferences" to reopen) + Privacy Policy updated. **Custom domain deferred** — staying on `vercel.app` (free subdomains like `*.qd.je` / `*.linkpc.net` rejected: no root ads.txt control, shared/blocklisted reputation). Still to do in dashboard: enable AdSense **Privacy & messaging (GDPR)** certified message for EEA.
 - [ ] Phase 4 — regenerate sitemap; verify prerendered titles; OG image; Lighthouse
 - [ ] Phase 5 — resubmit to AdSense
 - [ ] Post-approval — new tools, ⌘K search, interlinking, ad placement, distribution
