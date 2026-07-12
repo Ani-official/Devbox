@@ -59,6 +59,11 @@ export default function PrivacyPolicy() {
 
       <h2 className="mt-6 text-2xl font-semibold">Your Choices</h2>
       <ul className="list-disc ml-6 space-y-2">
+        <li>
+          When you first visit, a cookie banner lets you accept or reject non-essential (advertising and
+          analytics) cookies. Until you accept, these are set to a denied state using Google Consent Mode.
+        </li>
+        <li>You can change your choice at any time with the &ldquo;Cookie preferences&rdquo; link in the footer.</li>
         <li>You can block or clear cookies in your browser settings.</li>
         <li>You can clear local storage for DevBox from your browser to remove saved tool inputs.</li>
         <li>You can use ad blocking or privacy tools if you prefer not to see ads.</li>

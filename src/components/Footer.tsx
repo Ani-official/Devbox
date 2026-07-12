@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { openConsentSettings } from "../lib/consent";
 
 export default function Footer() {
   return (
@@ -40,6 +41,15 @@ export default function Footer() {
             <Link to="/contact" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">
               Contact
             </Link>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={openConsentSettings}
+              className="transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+            >
+              Cookie preferences
+            </button>
           </li>
         </ul>
       </div>

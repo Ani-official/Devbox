@@ -27,6 +27,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="DevBox" />
 
+    <!-- Google Consent Mode v2 — set BEFORE AdSense loads.
+         Defaults to denied; the on-page banner updates it when the user chooses,
+         and a stored choice is re-applied on load. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "granted",
+        security_storage: "granted",
+        wait_for_update: 500
+      });
+      try {
+        if (localStorage.getItem("devbox-consent") === "granted") {
+          gtag("consent", "update", {
+            ad_storage: "granted",
+            ad_user_data: "granted",
+            ad_personalization: "granted",
+            analytics_storage: "granted"
+          });
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9814892451020152"
      crossorigin="anonymous"></script>
