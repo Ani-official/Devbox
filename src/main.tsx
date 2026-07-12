@@ -1,16 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
-import App from "./App.tsx";
+import { ViteReactSSG } from "vite-react-ssg";
+import { routes } from "./routes";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+// ViteReactSSG sets up the router (createBrowserRouter), HelmetProvider, and
+// client hydration for us. On the client it hydrates the prerendered HTML; at
+// build time it renders each route to a static .html file.
+export const createRoot = ViteReactSSG({ routes });

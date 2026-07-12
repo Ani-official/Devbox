@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Editor, { loader } from "@monaco-editor/react";
 import type { OnChange } from "@monaco-editor/react";
 import { Copy, Check } from "lucide-react";
@@ -15,6 +15,11 @@ interface CodeEditorProps {
 
 export default function CodeEditor({ value, onChange, readOnly, language="json" }: CodeEditorProps) {
   const [copied, setCopied] = useState(false);
+  // Monaco relies on the DOM, so only render it after mount. During static
+  // prerendering (and the first client render) we show a matching placeholder
+  // to avoid touching `window`/`document` on the server and prevent layout shift.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const handleEditorChange: OnChange = (val) => {
     onChange(val || "");
@@ -38,24 +43,27 @@ export default function CodeEditor({ value, onChange, readOnly, language="json" 
         {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
       </button>
 
-      {/* Monaco Editor */}
-      <Editor
-        height="300px"
-        defaultLanguage={language}
-        value={value}
-        onChange={handleEditorChange}
-        theme="vs-dark"
-        options={{
-          readOnly: readOnly ?? false,
-          minimap: { enabled: false },
-          scrollbar: {vertical: "auto", horizontal: "auto",alwaysConsumeMouseWheel: false},
-                        
-          fontSize: 14,
-          wordWrap: "on",
-          scrollBeyondLastLine: false,
-        }}
-        
-      />
+      {/* Monaco Editor (client-only) */}
+      {mounted ? (
+        <Editor
+          height="300px"
+          defaultLanguage={language}
+          value={value}
+          onChange={handleEditorChange}
+          theme="vs-dark"
+          options={{
+            readOnly: readOnly ?? false,
+            minimap: { enabled: false },
+            scrollbar: {vertical: "auto", horizontal: "auto",alwaysConsumeMouseWheel: false},
+
+            fontSize: 14,
+            wordWrap: "on",
+            scrollBeyondLastLine: false,
+          }}
+        />
+      ) : (
+        <div className="h-[300px] w-full rounded bg-[#1e1e1e]" aria-hidden="true" />
+      )}
     </div>
   );
 }

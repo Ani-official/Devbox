@@ -17,6 +17,8 @@ export function useToolState(
 
   // Load from localStorage or URL on mount
   const [value, setValue] = useState<string>(() => {
+    // Guard for server-side prerendering: no localStorage/window on the server.
+    if (typeof window === "undefined") return initialValue;
     try {
       const fromStorage = localStorage.getItem(key);
       if (fromStorage) return fromStorage;
@@ -41,13 +43,15 @@ export function useToolState(
     if (isMounted) {
       try {
         localStorage.setItem(key, value);
-      } catch {}
+      } catch {
+        return;
+      }
     }
   }, [value, key, isMounted]);
 
   // Generate shareable URL
   const getShareableUrl = () => {
-    if (!urlParam) return "";
+    if (!urlParam || typeof window === "undefined") return "";
     const encoded = encodeURIComponent(value);
     return `${window.location.origin}${window.location.pathname}?${urlParam}=${encoded}`;
   };

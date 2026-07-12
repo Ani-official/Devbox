@@ -1,14 +1,16 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import CodeEditor from "../../components/Editor";
 import { useToolState } from "../../lib/useToolState";
 import { Button } from "@/components/ui/button";
 import { Share } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@/lib/helmet";
+import PageMeta from "../../components/PageMeta";
 
 function curlToFetch(curl: string): string {
   if (!curl.trim().startsWith("curl")) return "// Invalid cURL command";
 
-  let cmd = curl.trim().slice(5);
+  const cmd = curl.trim().slice(5);
   const urlMatch =
     cmd.match(/'(https?:\/\/[^']+)'|"https?:\/\/[^"]+"/) ||
     cmd.match(/https?:\/\/\S+/);
@@ -43,7 +45,7 @@ function curlToFetch(curl: string): string {
 function curlToAxios(curl: string): string {
   if (!curl.trim().startsWith("curl")) return "// Invalid cURL command";
 
-  let cmd = curl.trim().slice(5);
+  const cmd = curl.trim().slice(5);
   const urlMatch =
     cmd.match(/'(https?:\/\/[^']+)'|"https?:\/\/[^"]+"/) ||
     cmd.match(/https?:\/\/\S+/);
@@ -109,6 +111,7 @@ export default function CurlConverter() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
+      <PageMeta canonicalPath="/workspace/curl-converter" />
       <Helmet>
         <title>cURL to Fetch/Axios Converter | DevBox</title>
         <meta
@@ -125,14 +128,15 @@ export default function CurlConverter() {
         <meta name="twitter:title" content="cURL to Fetch/Axios Converter | DevBox" />
         <meta name="twitter:description" content="Convert cURL commands into Fetch or Axios code online. Perfect for developers testing APIs." />
         <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview-curl.png" />
-        <link rel="canonical" href="https://devbox-gamma.vercel.app/workspace/curl-converter" />
       </Helmet>
 
-      <h1 className="text-3xl font-bold mb-4">cURL Converter</h1>
-      <p className="mb-4 text-gray-700">
+      <div className="mb-6 rounded-3xl border border-slate-200 bg-white/85 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/80">
+        <h1 className="text-3xl font-bold text-slate-950 dark:text-white">cURL Converter</h1>
+        <p className="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">
         Quickly convert cURL commands into <strong>Fetch</strong> or <strong>Axios</strong> JavaScript code.
         Ideal for API testing or integrating requests into your projects.
-      </p>
+        </p>
+      </div>
 
       {/* Editor */}
       <div className="mb-4">
@@ -141,13 +145,13 @@ export default function CurlConverter() {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b mb-2">
+      <div className="flex border-b border-slate-200 mb-2 dark:border-slate-800">
         <button
           onClick={() => setActiveTab("fetch")}
           className={`px-4 py-2 text-lg font-semibold transition ${
             activeTab === "fetch"
-              ? "text-blue-500 border-b-2 border-blue-600"
-              : "text-gray-400"
+              ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400"
+              : "text-slate-500 dark:text-slate-400"
           }`}
         >
           Fetch
@@ -156,8 +160,8 @@ export default function CurlConverter() {
           onClick={() => setActiveTab("axios")}
           className={`px-4 py-2 text-lg font-semibold transition ${
             activeTab === "axios"
-              ? "text-blue-500 border-b-2 border-blue-600"
-              : "text-gray-400"
+              ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400"
+              : "text-slate-500 dark:text-slate-400"
           }`}
         >
           Axios
@@ -166,7 +170,7 @@ export default function CurlConverter() {
 
       {/* Output */}
       <div className="mb-4">
-        <label className="font-semibold">{activeTab} Output</label>
+        <label className="font-semibold text-slate-900 dark:text-white">{activeTab} Output</label>
         <CodeEditor
           value={activeTab === "fetch" ? fetchOutput : axiosOutput}
           onChange={() => {}}
@@ -185,9 +189,9 @@ export default function CurlConverter() {
       </Button>
 
       {/* Tips Section */}
-      <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6">
-        <h2 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">Tips for Developers:</h2>
-        <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+      <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg mb-6">
+        <h2 className="font-semibold mb-2 text-slate-950 dark:text-white">Tips for Developers:</h2>
+        <ul className="list-disc list-inside text-slate-600 dark:text-slate-300">
           <li>Use Fetch for lightweight front-end requests.</li>
           <li>Use Axios for advanced requests with interceptors or automatic JSON parsing.</li>
           <li>Verify headers and body are correctly converted for POST/PUT requests.</li>
@@ -197,37 +201,37 @@ export default function CurlConverter() {
 
       {/* Related Tools */}
       <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
+        <h2 className="text-2xl font-semibold mb-3 text-slate-950 dark:text-white">
           Related Tools
         </h2>
-        <p className="mb-2 text-gray-700 dark:text-gray-300">
+        <p className="mb-2 text-slate-600 dark:text-slate-300">
           Check out other handy tools in DevBox to make your development workflow faster and easier:
         </p>
         <ul className="list-disc pl-5 text-blue-600 dark:text-blue-400 space-y-1">
           <li>
-            <a href="/workspace/json-formatter" className="hover:underline">
+            <Link to="/workspace/json-formatter" className="hover:underline">
               JSON Formatter
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/workspace/regex-tester" className="hover:underline">
+            <Link to="/workspace/regex-tester" className="hover:underline">
               Regex Tester
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/workspace/color-converter" className="hover:underline">
+            <Link to="/workspace/color-converter" className="hover:underline">
               Color Converter
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/workspace/svg-optimizer" className="hover:underline">
+            <Link to="/workspace/svg-optimizer" className="hover:underline">
               SVG Optimizer
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/workspace/base64-tool" className="hover:underline">
+            <Link to="/workspace/base64-tool" className="hover:underline">
               Base64 Encoder/Decoder
-            </a>
+            </Link>
           </li>
         </ul>
       </section>

@@ -2,35 +2,44 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t bg-white dark:bg-gray-900 py-6 mt-8 text-gray-600 dark:text-gray-300 text-sm">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
-        {/* Left spacer */}
-        <div className="flex-1"></div>
+    <footer className="w-full border-t border-slate-200 bg-white/85 py-6 mt-10 text-sm text-slate-600 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80 dark:text-slate-300">
+      <div className="max-w-6xl mx-auto flex flex-col gap-4 px-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-center sm:text-left">
+          <div className="font-semibold text-slate-900 dark:text-white">DevBox</div>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Browser-based tools and guides for developers.
+          </p>
+        </div>
 
-        {/* Centered copyright */}
-        <span className="flex-1 text-center">
+        <span className="text-center text-xs text-slate-500 dark:text-slate-400">
           © {new Date().getFullYear()} DevBox. All rights reserved.
         </span>
 
-        {/* Right-aligned links */}
-        <ul className="flex flex-1 justify-end gap-4 mt-2 sm:mt-0">
+        <ul className="flex flex-wrap justify-center gap-4 sm:justify-end">
           <li>
-            <Link to="/about" className="hover:text-blue-600 dark:hover:text-blue-400">
+            <Link to="/about" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">
               About
             </Link>
           </li>
           <li>
-            <Link to="/privacy-policy" className="hover:text-blue-600 dark:hover:text-blue-400">
+            <Link to="/editorial-policy" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+              Editorial Policy
+            </Link>
+          </li>
+          <li>
+            <Link to="/privacy-policy" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">
               Privacy Policy
             </Link>
           </li>
           <li>
-            <a
-              href="mailto:service.devbox@gmail.com"
-              className="hover:text-blue-600 dark:hover:text-blue-400"
-            >
+            <Link to="/terms" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+              Terms
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="transition-colors hover:text-blue-600 dark:hover:text-blue-400">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

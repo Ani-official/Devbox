@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RefreshCw, Play, Trash2, Share } from "lucide-react";
 import yaml from "js-yaml";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@/lib/helmet";
 import CodeEditor from "../../components/Editor";
 import { useToolState } from "../../lib/useToolState";
+import PageMeta from "../../components/PageMeta";
 
 export default function JsonYamlConverter() {
   const [mode, setMode] = useToolState("jsonYaml_mode", "json-to-yaml", "mode");
@@ -29,8 +31,8 @@ export default function JsonYamlConverter() {
         const jsonStr = JSON.stringify(yamlObj, null, 2);
         setOutput(jsonStr);
       }
-    } catch (err: any) {
-      setError(err.message || "Invalid input format");
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "Invalid input format");
       setOutput("");
     }
   };
@@ -55,6 +57,7 @@ export default function JsonYamlConverter() {
 
   return (
     <div className="max-w-6xl mx-auto p-4 md:p-6">
+      <PageMeta canonicalPath="/workspace/json-yaml-converter" />
       <Helmet>
         <title>JSON to YAML Converter (and YAML to JSON) | DevBox</title>
         <meta
@@ -74,10 +77,6 @@ export default function JsonYamlConverter() {
         <meta
           property="og:url"
           content="https://devbox-gamma.vercel.app/workspace/json-yaml-converter"
-        />
-        <link
-          rel="canonical"
-          href="https://devbox-gamma.vercel.app/workspace/json-yaml-converter"
         />
         <script type="application/ld+json">
           {JSON.stringify({
@@ -214,9 +213,9 @@ export default function JsonYamlConverter() {
         <div>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
           <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
-            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter & Validator</a></li>
-            <li><a href="/workspace/curl-converter" className="hover:underline">cURL Converter</a></li>
-            <li><a href="/workspace/jwt-decoder" className="hover:underline">JWT Decoder</a></li>
+            <li><Link to="/workspace/json-formatter" className="hover:underline">JSON Formatter & Validator</Link></li>
+            <li><Link to="/workspace/curl-converter" className="hover:underline">cURL Converter</Link></li>
+            <li><Link to="/workspace/jwt-decoder" className="hover:underline">JWT Decoder</Link></li>
           </ul>
         </div>
       </section>

@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import CodeEditor from "../../components/Editor";
 import { useToolState } from "../../lib/useToolState";
 import { Button } from "@/components/ui/button";
 import { Share } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@/lib/helmet";
+import PageMeta from "../../components/PageMeta";
 
 export default function Base64Tool() {
   const [input, setInput, getShareableUrl] = useToolState(
@@ -47,6 +49,7 @@ export default function Base64Tool() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
+      <PageMeta canonicalPath="/workspace/base64-tool" />
       <Helmet>
         <title>Base64 Encoder/Decoder | DevBox</title>
         <meta
@@ -84,12 +87,6 @@ export default function Base64Tool() {
         <meta
           name="twitter:image"
           content="https://devbox-gamma.vercel.app/preview-base64.png"
-        />
-
-        {/* Canonical */}
-        <link
-          rel="canonical"
-          href="https://devbox-gamma.vercel.app/workspace/base64-tool"
         />
 
         {/* Structured Data */}
@@ -205,9 +202,9 @@ export default function Base64Tool() {
         <div>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
           <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
-            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter</a></li>
-            <li><a href="/workspace/jwt-decoder" className="hover:underline">JWT Decoder</a></li>
-            <li><a href="/workspace/curl-converter" className="hover:underline">cURL Converter</a></li>
+            <li><Link to="/workspace/json-formatter" className="hover:underline">JSON Formatter</Link></li>
+            <li><Link to="/workspace/jwt-decoder" className="hover:underline">JWT Decoder</Link></li>
+            <li><Link to="/workspace/curl-converter" className="hover:underline">cURL Converter</Link></li>
           </ul>
         </div>
       </section>

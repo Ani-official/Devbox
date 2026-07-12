@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/devbox.svg" />
 
+    <!-- Apply the saved theme before paint to avoid a flash of the wrong theme.
+         Only touches the <html> class (not React-managed DOM), so it does not
+         affect hydration. -->
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Preconnect for critical external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,72 +23,26 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Google AdSense -->
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9814892451020152"
-     crossorigin="anonymous"></script>
-
-    <!-- Title -->
-    <title>DevBox - Free Online Developer Tools</title>
-
-    <!-- Adsense Meta Tags -->
-     <meta name="google-adsense-account" content="ca-pub-9814892451020152">
-
-    <!-- Google Site Verification -->
-     <meta name="google-site-verification" content="mH9hjY7U2Crf9S-48_CVNkuhN0ccTwh5HeedoiP5tlE" />
-
-    <!-- Primary Meta Tags -->
-    <meta
-      name="description"
-      content="DevBox is your all-in-one online developer toolbox. Format JSON, test Regex, convert cURL, optimize SVGs, and more — simple, fast, and free tools for developers."
-    />
-    <meta name="keywords" content="DevBox, developer tools, JSON formatter, regex tester, cURL converter, base64 tool, color converter, SVG optimizer" />
     <meta name="author" content="DevBox" />
 
-    <!-- Canonical -->
-    <link rel="canonical" href="https://devbox-gamma.vercel.app/" />
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9814892451020152"
+     crossorigin="anonymous"></script>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://devbox-gamma.vercel.app/" />
-    <meta property="og:title" content="DevBox - Free Online Developer Tools" />
-    <meta
-      property="og:description"
-      content="All-in-one free developer toolbox. JSON formatter, Regex tester, cURL converter, Base64 tool, Color converter, SVG optimizer."
-    />
-    <meta property="og:image" content="https://devbox-gamma.vercel.app/preview.png" />
+    <!-- Adsense Meta Tags -->
+    <meta name="google-adsense-account" content="ca-pub-9814892451020152">
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://devbox-gamma.vercel.app/" />
-    <meta name="twitter:title" content="DevBox - Free Online Developer Tools" />
-    <meta
-      name="twitter:description"
-      content="Format JSON, test Regex, convert cURL, and optimize SVGs with DevBox. Fast, free, and developer-friendly."
-    />
-    <meta name="twitter:image" content="https://devbox-gamma.vercel.app/preview.png" />
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="mH9hjY7U2Crf9S-48_CVNkuhN0ccTwh5HeedoiP5tlE" />
 
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "DevBox",
-        "url": "https://devbox-gamma.vercel.app/",
-        "description": "All-in-one free developer toolbox for JSON, regex, cURL, Base64, colors, and SVGs.",
-        "publisher": {
-          "@type": "Organization",
-          "name": "DevBox"
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://devbox-gamma.vercel.app/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      }
-    </script>
+    <!--
+      Per-page title, description, canonical, Open Graph, Twitter and JSON-LD
+      tags are rendered for each route via react-helmet-async (see PageMeta.tsx)
+      and baked into the prerendered HTML at build time by vite-react-ssg. They
+      are intentionally kept out of this template to avoid duplicate head tags.
+    -->
   </head>
   <body>
     <div id="root"></div>

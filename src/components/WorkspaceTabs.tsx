@@ -13,16 +13,16 @@ export default function WorkspaceTabs() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto flex gap-3 border-b mb-4 overflow-x-auto">
+    <div className="max-w-6xl mx-auto flex gap-3 border-b border-slate-200/80 mb-4 overflow-x-auto px-1 pb-1 dark:border-slate-800/80">
       {tabs.map((tab) => (
         <NavLink
           key={tab.path}
           to={`/workspace/${tab.path}`}
           className={({ isActive }) =>
-            `px-3 py-2 text-sm font-medium rounded-t-md ${
+            `px-3 py-2 text-sm font-medium rounded-t-md transition-colors ${
               isActive
-                ? "bg-blue-800 text-white"
-                : "text-gray-600 hover:bg-gray-100"
+                ? "bg-blue-800 text-white shadow-sm"
+                : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900"
             }`
           }
         >

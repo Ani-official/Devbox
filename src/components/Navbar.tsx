@@ -3,12 +3,20 @@ import { Link } from "react-router-dom";
 import { Moon, Sun } from "lucide-react";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem("theme") === "dark"
-  );
+  // Start `false` so the first client render matches the server-prerendered HTML
+  // (avoids a hydration mismatch). The real stored preference is read after mount.
+  const [darkMode, setDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // Apply theme on mount and when darkMode changes
+  // Read the stored preference once, after hydration.
   useEffect(() => {
+    setDarkMode(document.documentElement.classList.contains("dark"));
+    setMounted(true);
+  }, []);
+
+  // Apply theme when the user toggles it (only after mount).
+  useEffect(() => {
+    if (!mounted) return;
     if (darkMode) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -16,10 +24,10 @@ export default function Navbar() {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [darkMode]);
+  }, [darkMode, mounted]);
 
   return (
-    <header className="w-full border-b bg-white/70 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm transition-colors">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-xl shadow-sm transition-colors dark:border-slate-800/80 dark:bg-slate-950/75">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
@@ -44,27 +52,33 @@ export default function Navbar() {
         </Link>
 
         {/* Nav Links + Dark Mode */}
-        <div className="flex items-center gap-6 text-gray-700 dark:text-gray-200">
-          <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">
+        <div className="flex items-center gap-6 text-slate-700 dark:text-slate-200">
+          <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
             Home
           </Link>
           <Link
             to="/workspace/json-formatter"
-            className="hover:text-blue-600 dark:hover:text-blue-400"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             Workspace
+          </Link>
+          <Link to="/about" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            About
+          </Link>
+          <Link to="/guides" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            Guides
           </Link>
 
           {/* Dark mode toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            className="p-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 transition"
             aria-label="Toggle dark mode"
           >
             {darkMode ? (
-              <Sun className="w-5 h-5 text-yellow-400" />
+              <Sun className="w-5 h-5 text-amber-400" />
             ) : (
-              <Moon className="w-5 h-5 text-gray-800" />
+              <Moon className="w-5 h-5 text-slate-700 dark:text-slate-200" />
             )}
           </button>
         </div>

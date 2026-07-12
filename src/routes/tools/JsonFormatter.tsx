@@ -2,8 +2,9 @@ import { useState } from "react";
 import CodeEditor from "../../components/Editor";
 import { useToolState } from "../../lib/useToolState";
 import { Button } from "@/components/ui/button";
-import { Share } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import { Code2, Share } from "lucide-react";
+import { Helmet } from "@/lib/helmet";
+import PageMeta from "../../components/PageMeta";
 
 export default function JsonFormatter() {
   const [jsonInput, setJsonInput, getShareableUrl] = useToolState(
@@ -18,8 +19,8 @@ export default function JsonFormatter() {
       const parsed = JSON.parse(jsonInput);
       setJsonInput(JSON.stringify(parsed, null, 2));
       setError(null);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "Invalid JSON");
     }
   };
 
@@ -30,19 +31,18 @@ export default function JsonFormatter() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
-      {/* ✅ SEO + Meta Tags */}
+      <PageMeta canonicalPath="/workspace/json-formatter" />
+
       <Helmet>
         <title>JSON Formatter & Beautifier | DevBox</title>
         <meta
           name="description"
-          content="Free online JSON formatter, beautifier, and validator. Format, validate, and share JSON data instantly with DevBox’s simple developer tools."
+          content="Free online JSON formatter, beautifier, and validator. Format, validate, and share JSON data instantly with DevBox."
         />
         <meta
           name="keywords"
           content="JSON formatter, JSON beautifier, JSON validator, format JSON online, developer tools"
         />
-
-        {/* Open Graph */}
         <meta property="og:title" content="JSON Formatter & Beautifier | DevBox" />
         <meta
           property="og:description"
@@ -57,8 +57,6 @@ export default function JsonFormatter() {
           property="og:image"
           content="https://devbox-gamma.vercel.app/preview-json.png"
         />
-
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="JSON Formatter & Beautifier | DevBox" />
         <meta
@@ -69,14 +67,6 @@ export default function JsonFormatter() {
           name="twitter:image"
           content="https://devbox-gamma.vercel.app/preview-json.png"
         />
-
-        {/* Canonical */}
-        <link
-          rel="canonical"
-          href="https://devbox-gamma.vercel.app/workspace/json-formatter"
-        />
-
-        {/* Schema.org Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -93,30 +83,35 @@ export default function JsonFormatter() {
             },
             publisher: {
               "@type": "Organization",
-              name: "DevBox Tools",
+              name: "DevBox",
               url: "https://devbox-gamma.vercel.app",
             },
           })}
         </script>
       </Helmet>
 
-      {/* ✅ Main Content */}
       <header className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-800 dark:border-blue-900/70 dark:bg-blue-950/50 dark:text-blue-200">
+          <Code2 className="h-4 w-4" />
+          Live JSON formatting workspace
+        </div>
+        <h1 className="mt-4 text-3xl font-bold text-slate-950 dark:text-white">
           Free Online JSON Formatter & Validator
         </h1>
+        <p className="mt-2 max-w-3xl text-slate-600 dark:text-slate-300">
+          Format messy JSON, validate its structure, and generate a shareable link without leaving the browser.
+        </p>
       </header>
 
-      {/* ✅ Interactive Tool */}
-      <section aria-label="JSON Editor">
+      <section aria-label="JSON Editor" className="rounded-3xl border border-slate-200 bg-white/85 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/80">
         <h2 className="sr-only">JSON Editor</h2>
         <CodeEditor value={jsonInput} onChange={setJsonInput} />
-        {error && <p className="text-red-600 mt-2">{error}</p>}
-        <div className="mt-4 flex gap-2">
+        {error && <p className="mt-3 text-sm text-red-600 dark:text-red-400">{error}</p>}
+        <div className="mt-4 flex flex-wrap gap-2">
           <Button
             onClick={handleFormat}
             variant="secondary"
-            className="px-4 py-2 bg-green-600 text-white hover:bg-green-700"
+            className="bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700"
           >
             Format JSON
           </Button>
@@ -124,7 +119,7 @@ export default function JsonFormatter() {
             onClick={handleCopyLink}
             variant="secondary"
             size="icon"
-            className="w-20 flex items-center gap-2 px-4 py-2 bg-blue-700 text-white hover:bg-blue-600"
+            className="flex h-10 w-auto items-center gap-2 bg-blue-700 px-4 py-2 text-white hover:bg-blue-600"
           >
             <Share className="h-4 w-4" />
             Share
@@ -132,23 +127,46 @@ export default function JsonFormatter() {
         </div>
       </section>
 
-      {/* ✅ Informational Section for SEO */}
-      <section className="mt-10 space-y-3 text-gray-700 leading-relaxed">
-        <h2 className="text-xl font-semibold">How to Use the JSON Formatter</h2>
-        <ol className="list-decimal ml-6 space-y-2">
-          <li>Paste your JSON into the editor above.</li>
-          <li>Click the <strong>“Format JSON”</strong> button.</li>
-          <li>View your clean, readable JSON output instantly.</li>
-          <li>Click <strong>“Share”</strong> to copy a link to your formatted JSON.</li>
-        </ol>
+      <section className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-900/80 dark:text-slate-300">
+          <h2 className="text-xl font-semibold text-slate-950 dark:text-white">How to Use the JSON Formatter</h2>
+          <ol className="mt-4 list-decimal space-y-2 pl-6">
+            <li>Paste your JSON into the editor above.</li>
+            <li>Click the Format JSON button.</li>
+            <li>View your clean, readable JSON output instantly.</li>
+            <li>Click Share to copy a link to your formatted JSON.</li>
+          </ol>
 
-        <h2 className="text-xl font-semibold mt-6">Why Use DevBox JSON Formatter?</h2>
-        <ul className="list-disc ml-6 space-y-1">
-          <li>Fast, secure, and works directly in your browser.</li>
-          <li>Automatically detects and highlights syntax errors.</li>
-          <li>Generates a shareable URL for collaboration.</li>
-          <li>No data is stored or uploaded — 100% client-side.</li>
-        </ul>
+          <h2 className="mt-8 text-xl font-semibold text-slate-950 dark:text-white">Why Use DevBox JSON Formatter?</h2>
+          <ul className="mt-4 list-disc space-y-1 pl-6">
+            <li>Fast, secure, and works directly in your browser.</li>
+            <li>Automatically detects and highlights syntax errors.</li>
+            <li>Generates a shareable URL for collaboration.</li>
+            <li>No data is stored or uploaded - 100% client-side.</li>
+          </ul>
+        </div>
+
+        <aside className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
+            Common fixes
+          </p>
+          <h3 className="mt-3 text-2xl font-bold text-slate-950 dark:text-white">
+            Catch the errors that break your JSON
+          </h3>
+          <p className="mt-3 text-slate-600 dark:text-slate-300">
+            Formatting instantly surfaces the usual culprits: trailing commas, missing quotes, mismatched braces, and
+            single quotes where JSON requires double quotes.
+          </p>
+          <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Example result</p>
+            <pre className="mt-3 overflow-auto rounded-xl bg-slate-950 p-4 text-xs text-slate-100">
+              <code>{`{
+  "name": "DevBox",
+  "tools": ["json", "regex", "curl"]
+}`}</code>
+            </pre>
+          </div>
+        </aside>
       </section>
     </div>
   );

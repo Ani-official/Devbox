@@ -1,26 +1,22 @@
+import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Play, Repeat } from "lucide-react";
-import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
 
 export default function WhyDevBoxAdvanced() {
   return (
-    <section className="w-full max-w-6xl mx-auto py-20 px-6">
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-10 font-anton">
+    <section className="mx-auto w-full max-w-6xl px-6 py-20">
+      <h2 className="mb-10 text-center font-anton text-4xl font-extrabold md:text-5xl">
         Why <span className="text-blue-600 dark:text-blue-400">DevBox?</span>
       </h2>
 
-      <div className="flex flex-col gap-28">
-        {/* Feature 1: JSON formatting w/ morph & gradient blob */}
+      <div className="flex flex-col gap-20">
         <FeatureRow
           title="Instant JSON Formatting"
           desc="Paste messy JSON and watch it transform into clean, readable output. One-click copy for configs, CI, and quick fixes."
           reverse={false}
         >
-          <div className="relative p-3 rounded-2xl overflow-hidden">
-            {/* gradient blob behind */}
+          <div className="relative overflow-hidden rounded-2xl p-3">
             <motion.div
               className="absolute -inset-6 rounded-3xl opacity-40"
               style={{
@@ -38,18 +34,16 @@ export default function WhyDevBoxAdvanced() {
           </div>
         </FeatureRow>
 
-        {/* Feature 2: Regex interactive + highlight */}
         <FeatureRow
           title="Regex Testing — Visual & Interactive"
           desc="Type a pattern and see matches highlight instantly. Build, test, and iterate faster with immediate feedback."
-          reverse={true}
+          reverse
         >
-          <div className="relative p-4 rounded-2xl overflow-hidden">
+          <div className="relative overflow-hidden rounded-2xl p-4">
             <motion.div
               className="absolute -inset-5 rounded-3xl opacity-30"
               style={{
-                background:
-                  "linear-gradient(120deg, rgba(99,102,241,0.06), rgba(236,72,153,0.03))",
+                background: "linear-gradient(120deg, rgba(99,102,241,0.06), rgba(236,72,153,0.03))",
                 filter: "blur(18px)",
               }}
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
@@ -61,18 +55,16 @@ export default function WhyDevBoxAdvanced() {
           </div>
         </FeatureRow>
 
-        {/* Feature 3: cURL -> fetch animation + typing */}
         <FeatureRow
           title="Convert cURL to Clean Code"
           desc="Paste a cURL and get ready-to-use Fetch or Axios code with a click — perfect for quickly using API examples."
           reverse={false}
         >
-          <div className="relative p-4 rounded-2xl overflow-hidden">
+          <div className="relative overflow-hidden rounded-2xl p-4">
             <motion.div
               className="absolute -inset-6 rounded-3xl opacity-30"
               style={{
-                background:
-                  "linear-gradient(120deg, rgba(14,165,233,0.05), rgba(34,197,94,0.03))",
+                background: "linear-gradient(120deg, rgba(14,165,233,0.05), rgba(34,197,94,0.03))",
                 filter: "blur(20px)",
               }}
               animate={{ x: [-8, 8, -8] }}
@@ -88,7 +80,6 @@ export default function WhyDevBoxAdvanced() {
   );
 }
 
-/* ---------- FeatureRow wrapper ---------- */
 function FeatureRow({
   title,
   desc,
@@ -97,15 +88,11 @@ function FeatureRow({
 }: {
   title: string;
   desc: string;
-  children: React.ReactNode;
+  children: ReactNode;
   reverse?: boolean;
 }) {
   return (
-    <div
-      className={`flex flex-col md:flex-row items-center gap-8 ${
-        reverse ? "md:flex-row-reverse" : ""
-      }`}
-    >
+    <div className={`flex flex-col items-center gap-8 ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}>
       <motion.div
         className="w-full md:w-1/2"
         initial={{ opacity: 0, y: 16 }}
@@ -113,10 +100,8 @@ function FeatureRow({
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h3 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
-          {title}
-        </h3>
-        <p className="text-gray-600 dark:text-gray-300">{desc}</p>
+        <h3 className="mb-3 text-2xl font-semibold text-slate-950 dark:text-white">{title}</h3>
+        <p className="text-slate-600 dark:text-slate-300">{desc}</p>
       </motion.div>
 
       <motion.div
@@ -126,7 +111,7 @@ function FeatureRow({
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/30 dark:bg-black/20 p-4 shadow-md">
+        <div className="rounded-2xl border border-slate-200 bg-white/70 p-4 shadow-md backdrop-blur dark:border-slate-800 dark:bg-slate-950/60">
           {children}
         </div>
       </motion.div>
@@ -134,43 +119,36 @@ function FeatureRow({
   );
 }
 
-/* ---------- JsonMorphPreview: morph messy -> formatted JSON ---------- */
 function JsonMorphPreview() {
   const messy = `{"name":"DevBox","config":{"env":"prod","logging":true,"features":["json","regex","curl","svg"]},"owner":"team"}`;
   const [formatted, setFormatted] = useState(() => pretty(messy));
   const [animating, setAnimating] = useState(false);
 
-  // play morph animation every X seconds
   useEffect(() => {
     const id = setInterval(() => {
       setAnimating(true);
       setTimeout(() => {
-        setFormatted((prev) =>
-          prev === pretty(messy) ? pretty(messy) : pretty(messy)
-        );
+        setFormatted(pretty(messy));
         setAnimating(false);
       }, 900);
     }, 8000);
+
     return () => clearInterval(id);
-  }, []);
+  }, [messy]);
 
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-white/80 dark:bg-gray-800/60 flex items-center justify-center">
-            <Play className="text-sky-600" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 text-sky-600 dark:bg-slate-800/70">
+            <Play className="h-4 w-4" />
           </div>
           <div>
-            <div className="text-sm font-medium text-gray-700 dark:text-gray-200">
-              Preview
-            </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
-              Auto-format in action
-            </div>
+            <div className="text-sm font-medium text-slate-700 dark:text-slate-200">Preview</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Auto-format in action</div>
           </div>
         </div>
-        <div className="text-xs text-gray-500 dark:text-gray-400">Auto</div>
+        <div className="text-xs text-slate-500 dark:text-slate-400">Auto</div>
       </div>
 
       <motion.div
@@ -178,24 +156,18 @@ function JsonMorphPreview() {
         initial={{ opacity: 1 }}
         animate={{ opacity: animating ? 0.5 : 1, scale: animating ? 0.997 : 1 }}
         transition={{ duration: 0.35 }}
-        className="rounded-lg overflow-hidden border"
+        className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700"
       >
-        <SyntaxHighlighter
-          language="json"
-          style={dracula}
-          wrapLongLines
-          customStyle={{ margin: 0, borderRadius: "0.5rem", fontSize: "13px", minHeight: "160px" }}
-        >
-          {formatted}
-        </SyntaxHighlighter>
+        <pre className="min-h-[160px] overflow-auto rounded-md bg-slate-950 p-4 font-mono text-[13px] text-slate-100">
+          <code>{formatted}</code>
+        </pre>
       </motion.div>
     </div>
   );
 }
 
-/* ---------- RegexInteractive: live input + highlighting + sample matches ---------- */
 function escapeHtml(text: string) {
-  return text.replace(/[&<>"'`=\/]/g, (s) => {
+  return text.replace(/[&<>"'`=/]/g, (character) => {
     const map: Record<string, string> = {
       "&": "&amp;",
       "<": "&lt;",
@@ -206,79 +178,74 @@ function escapeHtml(text: string) {
       "`": "&#x60;",
       "=": "&#x3D;",
     };
-    return map[s] || s;
+    return map[character] || character;
   });
 }
 
 function RegexInteractive() {
-  const [pattern, setPattern] = useState<string>(
-    "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
-  );
+  const [pattern, setPattern] = useState<string>("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
   const [flags, setFlags] = useState<string>("g");
-  const sample =
-    "Emails: test@mail.com, hello@dev.io, not-an-email, contact@company.co.uk\nPhones: +1-555-1234";
+  const sample = "Emails: test@mail.com, hello@dev.io, not-an-email, contact@company.co.uk\nPhones: +1-555-1234";
 
   const highlighted = useMemo(() => {
-    let regex: RegExp | null = null;
     try {
-      regex = new RegExp(pattern, flags);
+      const regex = new RegExp(pattern, flags);
+      const parts = sample.split(regex);
+      const matches = sample.match(regex) || [];
+
+      let html = "";
+      for (let index = 0; index < parts.length; index += 1) {
+        html += escapeHtml(parts[index]);
+        if (index < matches.length) {
+          html += `<span class="highlight-match">${escapeHtml(matches[index])}</span>`;
+        }
+      }
+
+      return { html, error: false };
     } catch {
       return { html: escapeHtml(sample), error: true };
     }
-    const parts = sample.split(regex);
-    const matches = sample.match(regex) || [];
-    // build highlighted HTML
-    let html = "";
-    for (let i = 0; i < parts.length; i++) {
-      html += escapeHtml(parts[i]);
-      if (i < matches.length) {
-        const m = escapeHtml(matches[i]);
-        html += `<span class="highlight-match">${m}</span>`;
-      }
-    }
-    return { html, error: false };
   }, [pattern, flags]);
 
   return (
     <div className="space-y-3">
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <div className="flex-1">
-          <label htmlFor="why-regex-pattern" className="text-xs text-gray-500">Pattern</label>
+          <label htmlFor="why-regex-pattern" className="text-xs text-slate-500 dark:text-slate-400">
+            Pattern
+          </label>
           <input
             id="why-regex-pattern"
             value={pattern}
-            onChange={(e) => setPattern(e.target.value)}
-            className="w-full px-3 py-2 rounded-md border bg-white/5 dark:bg-black/10 text-sm"
+            onChange={(event) => setPattern(event.target.value)}
+            className="w-full rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950/80 dark:text-slate-100"
             placeholder="Enter regex (no / / )"
           />
         </div>
         <div className="w-24">
-          <label htmlFor="why-regex-flags" className="text-xs text-gray-500">Flags</label>
+          <label htmlFor="why-regex-flags" className="text-xs text-slate-500 dark:text-slate-400">
+            Flags
+          </label>
           <input
             id="why-regex-flags"
             value={flags}
-            onChange={(e) => setFlags(e.target.value)}
-            className="w-full px-3 py-2 rounded-md border bg-white/5 dark:bg-black/10 text-sm"
+            onChange={(event) => setFlags(event.target.value)}
+            className="w-full rounded-md border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950/80 dark:text-slate-100"
           />
         </div>
       </div>
 
-      <div className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
+      <div className="text-sm leading-relaxed text-slate-700 dark:text-slate-200">
         <div
-          className={`whitespace-pre-wrap p-3 rounded-md border bg-zinc-800 text-white text-sm font-mono`}
+          className="whitespace-pre-wrap rounded-md border border-slate-300 bg-slate-900 p-3 font-mono text-sm text-white dark:border-slate-700"
           dangerouslySetInnerHTML={{ __html: highlighted.html }}
         />
-        {highlighted.error && (
-          <div className="mt-2 text-xs text-red-400">
-            Invalid pattern — check the syntax.
-          </div>
-        )}
+        {highlighted.error && <div className="mt-2 text-xs text-red-400">Invalid pattern — check the syntax.</div>}
       </div>
     </div>
   );
 }
 
-/* ---------- CurlToFetchPreview: typing animation + mapping ---------- */
 function CurlToFetchPreview() {
   const curlExample = `curl -X POST https://api.devbox.tools/login \\
   -H "Content-Type: application/json" \\
@@ -293,66 +260,65 @@ function CurlToFetchPreview() {
   const [typed, setTyped] = useState("");
   const [stage, setStage] = useState<"curl" | "arrow" | "fetch">("curl");
 
-  // typing animation for curl then arrow then fetch
   useEffect(() => {
     let mounted = true;
-    let i = 0;
+    let index = 0;
+
     setStage("curl");
     setTyped("");
-    const t1 = setInterval(() => {
-      if (!mounted) return;
-      i++;
-      setTyped(curlExample.slice(0, i));
-      if (i >= curlExample.length) {
-        clearInterval(t1);
+
+    const typing = setInterval(() => {
+      if (!mounted) {
+        return;
+      }
+
+      index += 1;
+      setTyped(curlExample.slice(0, index));
+
+      if (index >= curlExample.length) {
+        clearInterval(typing);
         setTimeout(() => {
           setStage("arrow");
           setTyped("→ converting …");
           setTimeout(() => {
-            // type fetch
             setStage("fetch");
-            let j = 0;
+            let fetchIndex = 0;
             setTyped("");
-            const t2 = setInterval(() => {
-              j++;
-              setTyped(fetchExample.slice(0, j));
-              if (j >= fetchExample.length) {
-                clearInterval(t2);
+            const fetchTyping = setInterval(() => {
+              fetchIndex += 1;
+              setTyped(fetchExample.slice(0, fetchIndex));
+              if (fetchIndex >= fetchExample.length) {
+                clearInterval(fetchTyping);
               }
             }, 12);
           }, 700);
         }, 700);
       }
     }, 10);
+
     return () => {
       mounted = false;
-      clearInterval(t1);
+      clearInterval(typing);
     };
-  }, []);
+  }, [curlExample, fetchExample]);
 
   return (
-    <div className="space-y-3 font-mono text-sm text-gray-900 dark:text-gray-100">
+    <div className="space-y-3 font-mono text-sm text-slate-900 dark:text-slate-100">
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded bg-white/80 dark:bg-gray-800/60 flex items-center justify-center">
-          <Repeat className="text-sky-600" />
+        <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-100 dark:bg-slate-800/70">
+          <Repeat className="h-4 w-4 text-sky-600" />
         </div>
-        <div className="text-xs text-gray-500">Live conversion</div>
+        <div className="text-xs text-slate-500 dark:text-slate-400">Live conversion</div>
       </div>
-      <div className={`${stage === "curl" ? "text-indigo-400" : ""}`}>
-        <SyntaxHighlighter
-          wrapLongLines
-          language="javascript"
-          style={dracula}
-          className="overflow-auto min-h-[120px] rounded-md border"
-        >
-          {typed}
-        </SyntaxHighlighter>
+      <div className={stage === "curl" ? "text-indigo-400" : ""}>
+        <pre className="min-h-[120px] overflow-auto rounded-md border border-slate-700 bg-slate-950 p-4 font-mono text-[13px] text-slate-100">
+          <code>{typed}</code>
+        </pre>
       </div>
     </div>
   );
 }
 
-/* ---------- small util ---------- */
 function pretty(jsonLike: string) {
   try {
     return JSON.stringify(JSON.parse(jsonLike), null, 2);

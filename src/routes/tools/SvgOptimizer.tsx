@@ -1,10 +1,29 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useToolState } from "../../lib/useToolState";
 import CodeEditor from "../../components/Editor";
 import { Button } from "@/components/ui/button";
 import { Copy, Download, Share } from "lucide-react";
-import { optimize } from "svgo";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@/lib/helmet";
+import PageMeta from "../../components/PageMeta";
+
+function optimizeSvgMarkup(svg: string) {
+  const trimmed = svg.trim();
+  if (!trimmed) return "";
+
+  const output = trimmed
+    .replace(/<\?xml[\s\S]*?\?>/g, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<metadata[\s\S]*?<\/metadata>/gi, "")
+    .replace(/<title[\s\S]*?<\/title>/gi, "")
+    .replace(/<desc[\s\S]*?<\/desc>/gi, "")
+    .replace(/>\s+</g, "><")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s*=\s*/g, "=")
+    .trim();
+
+  return output;
+}
 
 export default function SvgOptimizer() {
   const [svgInput, setSvgInput, getShareableUrl] = useToolState(
@@ -19,12 +38,12 @@ export default function SvgOptimizer() {
   // Optimize SVG whenever input changes
   useEffect(() => {
     try {
-      const result = optimize(svgInput, { multipass: true });
-      setOptimizedSvg(result.data);
+      const optimized = optimizeSvgMarkup(svgInput);
+      setOptimizedSvg(optimized);
       setError(null);
-    } catch (err: any) {
+    } catch (error: unknown) {
       setOptimizedSvg("");
-      setError(err.message);
+      setError(error instanceof Error ? error.message : "Invalid SVG input");
     }
   }, [svgInput]);
 
@@ -50,6 +69,7 @@ export default function SvgOptimizer() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
+      <PageMeta canonicalPath="/workspace/svg-optimizer" />
       <Helmet>
         <title>SVG Optimizer | DevBox</title>
         <meta
@@ -90,11 +110,6 @@ export default function SvgOptimizer() {
         />
 
         {/* Canonical */}
-        <link
-          rel="canonical"
-          href="https://devbox-gamma.vercel.app/workspace/svg-optimizer"
-        />
-
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -249,9 +264,9 @@ export default function SvgOptimizer() {
         <div>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
           <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
-            <li><a href="/workspace/color-converter" className="hover:underline">Color Converter</a></li>
-            <li><a href="/workspace/base64-tool" className="hover:underline">Base64 Encoder / Decoder</a></li>
-            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter</a></li>
+            <li><Link to="/workspace/color-converter" className="hover:underline">Color Converter</Link></li>
+            <li><Link to="/workspace/base64-tool" className="hover:underline">Base64 Encoder / Decoder</Link></li>
+            <li><Link to="/workspace/json-formatter" className="hover:underline">JSON Formatter</Link></li>
           </ul>
         </div>
       </section>

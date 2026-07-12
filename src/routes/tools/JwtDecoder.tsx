@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useToolState } from "../../lib/useToolState";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,9 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Helmet } from "@/lib/helmet";
+import PageMeta from "../../components/PageMeta";
 
 function decodeJWT(token: string) {
   try {
@@ -25,8 +25,13 @@ function decodeJWT(token: string) {
     const signature = parts[2];
 
     return { header, payload, signature, error: null };
-  } catch (err: any) {
-    return { header: null, payload: null, signature: null, error: err.message };
+  } catch (error: unknown) {
+    return {
+      header: null,
+      payload: null,
+      signature: null,
+      error: error instanceof Error ? error.message : "Invalid JWT",
+    };
   }
 }
 
@@ -55,10 +60,11 @@ export default function JwtDecoder() {
     } else {
       setOutput("");
     }
-  }, [input]);
+  }, [input, setOutput]);
 
   return (
     <div className="max-w-6xl mx-auto p-4 md:p-6">
+      <PageMeta canonicalPath="/workspace/jwt-decoder" />
       <Helmet>
         <title>JWT Decoder & Inspector | DevBox</title>
         <meta
@@ -78,10 +84,6 @@ export default function JwtDecoder() {
         <meta
           property="og:url"
           content="https://devbox-gamma.vercel.app/workspace/jwt-decoder"
-        />
-        <link
-          rel="canonical"
-          href="https://devbox-gamma.vercel.app/workspace/jwt-decoder"
         />
         <script type="application/ld+json">
           {JSON.stringify({
@@ -139,17 +141,27 @@ export default function JwtDecoder() {
             )}
           </CardHeader>
           <CardContent>
-            <SyntaxHighlighter
-              language="json"
-              style={dracula}
-              wrapLongLines
-              className="bg-gray-800 h-[500px] overflow-auto rounded-md font-mono text-sm whitespace-pre-wrap break-words"
-            >
-              {output ? output : "Decoded result will appear here..."}
-            </SyntaxHighlighter>
+            <pre className="h-[500px] overflow-auto rounded-md bg-gray-950 p-4 font-mono text-sm text-gray-100 whitespace-pre-wrap break-words">
+              <code>{output ? output : "Decoded result will appear here..."}</code>
+            </pre>
           </CardContent>
         </Card>
       </motion.div>
+
+      <section className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">What you can inspect</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
+            Header, payload, signature, and common claims like `exp`, `iat`, and `aud`.
+          </p>
+        </div>
+        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Private by design</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
+            Decoding runs entirely in your browser — your token is never sent to a server or stored anywhere.
+          </p>
+        </div>
+      </section>
 
       {/* Informational Content */}
       <section className="mt-10 space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -204,9 +216,9 @@ export default function JwtDecoder() {
         <div>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Related Tools</h2>
           <ul className="list-disc ml-6 text-blue-600 dark:text-blue-400 space-y-1">
-            <li><a href="/workspace/json-formatter" className="hover:underline">JSON Formatter</a></li>
-            <li><a href="/workspace/base64-tool" className="hover:underline">Base64 Encoder / Decoder</a></li>
-            <li><a href="/workspace/curl-converter" className="hover:underline">cURL Converter</a></li>
+            <li><Link to="/workspace/json-formatter" className="hover:underline">JSON Formatter</Link></li>
+            <li><Link to="/workspace/base64-tool" className="hover:underline">Base64 Encoder / Decoder</Link></li>
+            <li><Link to="/workspace/curl-converter" className="hover:underline">cURL Converter</Link></li>
           </ul>
         </div>
       </section>
