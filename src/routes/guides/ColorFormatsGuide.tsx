@@ -40,6 +40,7 @@ export default function ColorFormatsGuide() {
       relatedGuides={[
         { label: "Optimizing SVGs for the web", to: "/guides/svg-optimization" },
         { label: "JSON formatting basics", to: "/guides/json-formatting" },
+        { label: "Color Theory for Developers (deep dive)", to: "/guides/color-theory" },
       ]}
     >
       <p>

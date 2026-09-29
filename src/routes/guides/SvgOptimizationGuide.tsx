@@ -40,6 +40,7 @@ export default function SvgOptimizationGuide() {
       relatedGuides={[
         { label: "HEX, RGB, and HSL colors", to: "/guides/color-formats" },
         { label: "Base64 encoding explained", to: "/guides/base64-encoding" },
+        { label: "How SVG Rendering Works (deep dive)", to: "/guides/svg-rendering-internals" },
       ]}
     >
       <p>

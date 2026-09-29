@@ -40,6 +40,7 @@ export default function JsonFormattingGuide() {
       relatedGuides={[
         { label: "JSON vs YAML: when to use each", to: "/guides/json-yaml" },
         { label: "Decoding and inspecting JWTs", to: "/guides/jwt-decoding" },
+        { label: "How JSON Parsers Work (deep dive)", to: "/guides/json-parsing-internals" },
       ]}
     >
       <p>

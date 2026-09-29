@@ -18,6 +18,16 @@ import Base64Guide from "./routes/guides/Base64Guide";
 import ColorFormatsGuide from "./routes/guides/ColorFormatsGuide";
 import JsonYamlGuide from "./routes/guides/JsonYamlGuide";
 import SvgOptimizationGuide from "./routes/guides/SvgOptimizationGuide";
+import Base64MechanicsGuide from "./routes/guides/Base64MechanicsGuide";
+import JsonParsingGuide from "./routes/guides/JsonParsingGuide";
+import RegexEnginesGuide from "./routes/guides/RegexEnginesGuide";
+import JwtSecurityGuide from "./routes/guides/JwtSecurityGuide";
+import ColorTheoryGuide from "./routes/guides/ColorTheoryGuide";
+import HttpAnatomyGuide from "./routes/guides/HttpAnatomyGuide";
+import SvgInternalsGuide from "./routes/guides/SvgInternalsGuide";
+import YamlTradeoffsGuide from "./routes/guides/YamlTradeoffsGuide";
+import CharacterEncodingGuide from "./routes/guides/CharacterEncodingGuide";
+import UrlEncodingGuide from "./routes/guides/UrlEncodingGuide";
 
 import JsonFormatter from "./routes/tools/JsonFormatter";
 import RegexTester from "./routes/tools/RegexTester";
@@ -51,6 +61,16 @@ export const routes: RouteRecord[] = [
       { path: "guides/color-formats", element: <ColorFormatsGuide /> },
       { path: "guides/json-yaml", element: <JsonYamlGuide /> },
       { path: "guides/svg-optimization", element: <SvgOptimizationGuide /> },
+      { path: "guides/base64-bit-mechanics", element: <Base64MechanicsGuide /> },
+      { path: "guides/json-parsing-internals", element: <JsonParsingGuide /> },
+      { path: "guides/regex-engine-internals", element: <RegexEnginesGuide /> },
+      { path: "guides/jwt-security", element: <JwtSecurityGuide /> },
+      { path: "guides/color-theory", element: <ColorTheoryGuide /> },
+      { path: "guides/http-request-anatomy", element: <HttpAnatomyGuide /> },
+      { path: "guides/svg-rendering-internals", element: <SvgInternalsGuide /> },
+      { path: "guides/yaml-design-tradeoffs", element: <YamlTradeoffsGuide /> },
+      { path: "guides/character-encoding", element: <CharacterEncodingGuide /> },
+      { path: "guides/url-encoding", element: <UrlEncodingGuide /> },
       {
         path: "workspace",
         element: <Workspace />,

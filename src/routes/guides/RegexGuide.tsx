@@ -40,6 +40,7 @@ export default function RegexGuide() {
       relatedGuides={[
         { label: "cURL to fetch and axios", to: "/guides/curl-to-fetch" },
         { label: "JSON formatting explained", to: "/guides/json-formatting" },
+        { label: "Regex Engines Explained (deep dive)", to: "/guides/regex-engine-internals" },
       ]}
     >
       <p>

@@ -96,6 +96,66 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/base64-bit-mechanics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/json-parsing-internals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/regex-engine-internals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/jwt-security</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/color-theory</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/http-request-anatomy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/svg-rendering-internals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/yaml-design-tradeoffs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/character-encoding</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://devbox-gamma.vercel.app/guides/url-encoding</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Tools -->
   <url>
     <loc>https://devbox-gamma.vercel.app/workspace/json-formatter</loc>

@@ -40,6 +40,7 @@ export default function Base64Guide() {
       relatedGuides={[
         { label: "Understanding JWTs", to: "/guides/jwt-decoding" },
         { label: "Optimizing SVGs for the web", to: "/guides/svg-optimization" },
+        { label: "The Bit-Level Mechanics of Base64 (deep dive)", to: "/guides/base64-bit-mechanics" },
       ]}
     >
       <p>

@@ -155,13 +155,51 @@ Only after Phases 0–2 are live and verified via `curl`. Request review in AdSe
 
 ## Execution checklist
 
-- [x] **Phase 0 — DONE.** Rewrote all self-referential/AdSense copy (Home, About, JsonFormatter, JwtDecoder, Contact, Editorial). No visible mentions of AdSense/SEO/crawlers remain (only the required Privacy disclosure + standard Terms clause).
-- [x] **Phase 1 — DONE.** Static prerendering via `vite-react-ssg`; every route now ships real HTML. Verified 18 prerendered pages with unique titles/meta and full body content, and 14/14 functional browser tests pass.
-- [x] **Phase 2 — DONE.** Content depth: rewrote the 3 existing guides to ~1,000–1,200 words each and added 5 new guides (JWT, Base64, color formats, JSON/YAML, SVG), all with worked examples, comparison tables, and an FAQ. Added a `/guides` hub page, `FAQPage` + `TechArticle` JSON-LD via a shared `GuideLayout`, and wired routes/nav/sitemap. 8 substantial guides total, all prerendered.
-- [~] **Phase 3 — mostly done.** Cookie-consent banner with **Google Consent Mode v2** shipped (defaults denied before AdSense, Accept/Reject, persisted, footer "Cookie preferences" to reopen) + Privacy Policy updated. **Custom domain deferred** — staying on `vercel.app` (free subdomains like `*.qd.je` / `*.linkpc.net` rejected: no root ads.txt control, shared/blocklisted reputation). Still to do in dashboard: enable AdSense **Privacy & messaging (GDPR)** certified message for EEA.
-- [x] **Phase 4 — DONE.** Generated 7 branded 1200×630 OG preview images (fixing previously-broken social cards). Lighthouse (desktop): **Performance 96, Accessibility 100, SEO 100**, Best Practices improved by fixing "charset too late" (hoisted `<meta charset>` to first in `<head>` via vite-react-ssg `onPageRendered`). Core Web Vitals green: LCP 1.3s, CLS 0.03, TBT 0ms. Remaining Best-Practices dings (third-party cookies, AdSense unused JS) are inherent to serving ads.
-- [ ] Phase 5 — resubmit to AdSense
-- [ ] Post-approval — new tools, ⌘K search, interlinking, ad placement, distribution
+_Re-verified against the live codebase on 2026-09-29 — each item below was checked directly (grep/file read), not just carried over from the phase summary._
+
+### Phase 0 — Copy cleanup — ✅ DONE (verified)
+- [x] `Home.tsx`, `JsonFormatter.tsx`, `WhyDevbox.tsx`, `Contact.tsx`, `EditorialPolicy.tsx`, `JwtDecoder.tsx` — no visible "reads like a product / AdSense / SEO / crawler" language remains
+- [x] Only remaining AdSense mentions are in `About.tsx` (a legitimate disclosure line) and `PrivacyPolicy.tsx` (the required cookie/ads disclosure) — these are expected, not a gaming signal
+
+### Phase 1 — Crawler-visible content (prerendering) — ✅ DONE (verified)
+- [x] `vite-react-ssg` wired into `dev`/`build` scripts in `package.json`
+- [x] `react-router-dom` pinned to `^6.30.4`; `react-helmet-async` pinned to `1.3.0` via `overrides`
+- [x] SSR-safety guards present: guarded `localStorage` in `useToolState.ts`, client-only Monaco in `Editor.tsx`, no-FOUC theme script in `index.html`
+- [ ] **Re-run the acceptance test against production** — `curl https://devbox-gamma.vercel.app/about` and confirm real HTML body, not just `<div id="root">`. The doc's "18 pages verified" note is undated; re-verify right before resubmitting, in case a later change regressed it.
+
+### Phase 2 — Content depth — ✅ DONE, then substantially expanded (2026-09-29)
+- [x] 8 original practical guide pages: Base64, ColorFormats, CurlToFetch, JsonFormatting, JsonYaml, JwtDecoding, Regex, SvgOptimization — plus the `GuidesIndex` hub
+- [x] **10 new deep-dive theory/internals guides added**, each 1000–1500 words of original technical prose with worked examples, code blocks, and its own FAQ/`TechArticle`+`FAQPage` JSON-LD — going beyond "how to use the tool" into the actual mechanics: `base64-bit-mechanics`, `json-parsing-internals`, `regex-engine-internals`, `jwt-security`, `color-theory`, `http-request-anatomy`, `svg-rendering-internals`, `yaml-design-tradeoffs`, `character-encoding`, `url-encoding`
+- [x] **18 guides total** (up from 8), within the 15–20 target range for a genuine knowledge base rather than thin tool-usage notes
+- [x] Every new guide wired into `routes.tsx`, listed on `/guides` (`GuidesIndex.tsx`), added to `sitemap.xml`, and cross-linked both ways with its paired practical guide via `relatedGuides`
+- [x] Verified via full `npm run build`: TypeScript compiles clean, all 18 guide routes prerender to real static HTML with correct `<title>`, meta description, OG tags, canonical URL, and `TechArticle`/`FAQPage` JSON-LD — confirmed on `guides/base64-bit-mechanics.html` (2,600+ words of rendered text, both schema blocks present)
+- [ ] Spot-check the original 8 guides are still 800–1,500 words with FAQ/JSON-LD intact (file presence confirmed; word count not re-measured here)
+
+### Phase 3 — Trust & compliance — ⚠️ PARTIALLY DONE
+- [x] Consent banner ships real **Google Consent Mode v2** signals — verified `gtag("consent","default",…)` in `index.html` (denied by default) and `gtag("consent","update",…)` in `ConsentBanner.tsx` covering `ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`
+- [x] `ads.txt` correct: `google.com, pub-9814892451020152, DIRECT, f08c47fec0942fa0`
+- [x] `robots.txt` open (`Allow: /`), points to `sitemap.xml`
+- [ ] **Custom domain — still deferred.** `index.html`/`robots.txt` still point at `devbox-gamma.vercel.app`. This remains the plan's own highest-leverage trust upgrade and is not done.
+- [ ] **Enable AdSense "Privacy & messaging (GDPR)" certified message for EEA traffic.** This is an AdSense dashboard setting, not code — cannot be verified or completed from the repo. Confirm in the AdSense account before resubmitting.
+
+### Phase 4 — Technical SEO polish — ✅ DONE (verified)
+- [x] `sitemap.xml` present in `public/`
+- [x] 7 branded 1200×630 OG preview images present: `preview.png`, `preview-base64.png`, `preview-color.png`, `preview-curl.png`, `preview-json.png`, `preview-regex.png`, `preview-svg.png`
+- [ ] Re-run Lighthouse against production to confirm scores are still current (last recorded: Performance 96 / Accessibility 100 / SEO 100) — not verifiable from static analysis, needs a live run
+
+### Phase 5 — Resubmit — ❌ NOT STARTED
+- [ ] Confirm Phases 0–2 are live in **production** (not just local build) via `curl`
+- [ ] Submit the review request in the AdSense dashboard
+
+### Post-approval / product-gap backlog (§5) — not blockers, status noted for planning
+- [ ] `alert("Link copied to clipboard!")` still present at `JsonFormatter.tsx:29` — not yet replaced with a toast
+- [ ] Command palette / ⌘K search — not found in codebase, not started
+- [x] Guide interlinking exists — `GuideLayout.tsx` supports `relatedTools`/`relatedGuides` props, already used by the guide pages
+- [ ] New tools (UUID/ULID, timestamp, hash, URL encode, JWT verify, diff, cron, mock JSON, markdown) — none present, still 8 tools only
+- [ ] Offline/PWA — not started
+- [ ] Ad placement + distribution/reach strategy (§6) — post-approval only, not applicable yet
+
+**Bottom line: 3 blockers stand between here and resubmitting** — production re-verification of Phases 0–2 via `curl`, the custom-domain decision (deferred but flagged as highest-leverage), and toggling GDPR messaging in the AdSense dashboard. Everything else in Phases 0, 1, 2, and 4 is done and verified in code.
 
 ---
 

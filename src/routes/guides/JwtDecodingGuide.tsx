@@ -40,6 +40,7 @@ export default function JwtDecodingGuide() {
       relatedGuides={[
         { label: "Base64 encoding explained", to: "/guides/base64-encoding" },
         { label: "JSON formatting basics", to: "/guides/json-formatting" },
+        { label: "JWT Security Deep Dive", to: "/guides/jwt-security" },
       ]}
     >
       <p>

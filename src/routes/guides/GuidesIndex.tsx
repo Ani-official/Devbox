@@ -1,5 +1,24 @@
 import { Link } from "react-router-dom";
-import { Braces, Regex, Terminal, KeyRound, Binary, Palette, FileCode2, Image } from "lucide-react";
+import {
+  Braces,
+  Regex,
+  Terminal,
+  KeyRound,
+  Binary,
+  Palette,
+  FileCode2,
+  Image,
+  Binary as BitIcon,
+  ScanSearch,
+  GitBranch,
+  ShieldAlert,
+  SwatchBook,
+  Network,
+  Layers,
+  FileWarning,
+  Type,
+  Link2,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import PageMeta from "../../components/PageMeta";
 
@@ -67,6 +86,76 @@ const guides: GuideCard[] = [
     to: "/guides/svg-optimization",
     icon: Image,
     time: "6 min read",
+  },
+  {
+    title: "The Bit-Level Mechanics of Base64 Encoding",
+    desc: "How 3 bytes become 4 characters, worked bit-by-bit, plus padding, alphabets, and why it isn't encryption.",
+    to: "/guides/base64-bit-mechanics",
+    icon: BitIcon,
+    time: "8 min read",
+  },
+  {
+    title: "How JSON Parsers Work",
+    desc: "Tokenizing, recursive-descent parsing, and exactly why trailing commas and single quotes fail.",
+    to: "/guides/json-parsing-internals",
+    icon: ScanSearch,
+    time: "9 min read",
+  },
+  {
+    title: "Regex Engines Explained",
+    desc: "Backtracking NFAs, catastrophic backtracking, ReDoS, and why linear-time engines can't do backreferences.",
+    to: "/guides/regex-engine-internals",
+    icon: GitBranch,
+    time: "9 min read",
+  },
+  {
+    title: "JWT Security Deep Dive",
+    desc: "The alg:none bypass, RS256/HS256 algorithm confusion, and the claims a valid signature doesn't check.",
+    to: "/guides/jwt-security",
+    icon: ShieldAlert,
+    time: "9 min read",
+  },
+  {
+    title: "Color Theory for Developers",
+    desc: "Gamma correction, why averaging hex colors gives the wrong gray, and why HSL isn't perceptually uniform.",
+    to: "/guides/color-theory",
+    icon: SwatchBook,
+    time: "9 min read",
+  },
+  {
+    title: "The Anatomy of an HTTP Request",
+    desc: "The raw wire format, what cURL flags actually send, and why CORS preflight only happens in browsers.",
+    to: "/guides/http-request-anatomy",
+    icon: Network,
+    time: "10 min read",
+  },
+  {
+    title: "How SVG Rendering Works",
+    desc: "The path-data mini-language, why exported SVGs bloat, and what an optimizer's passes actually remove.",
+    to: "/guides/svg-rendering-internals",
+    icon: Layers,
+    time: "9 min read",
+  },
+  {
+    title: "YAML's Hidden Traps",
+    desc: "The Norway problem, octal permission ambiguity, and why quoting is the only real fix.",
+    to: "/guides/yaml-design-tradeoffs",
+    icon: FileWarning,
+    time: "9 min read",
+  },
+  {
+    title: "Character Encoding Explained",
+    desc: "ASCII, code pages, the codepoint-vs-encoding distinction, and how UTF-8 actually packs bits.",
+    to: "/guides/character-encoding",
+    icon: Type,
+    time: "9 min read",
+  },
+  {
+    title: "URL Encoding and Percent-Encoding",
+    desc: "What RFC 3986 actually escapes, why + means space in query strings, and how double-encoding happens.",
+    to: "/guides/url-encoding",
+    icon: Link2,
+    time: "8 min read",
   },
 ];
 

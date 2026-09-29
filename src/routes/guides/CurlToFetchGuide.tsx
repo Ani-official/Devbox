@@ -40,6 +40,7 @@ export default function CurlToFetchGuide() {
       relatedGuides={[
         { label: "Regex testing explained", to: "/guides/regex-testing" },
         { label: "Working with JWTs", to: "/guides/jwt-decoding" },
+        { label: "The Anatomy of an HTTP Request (deep dive)", to: "/guides/http-request-anatomy" },
       ]}
     >
       <p>

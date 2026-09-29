@@ -40,6 +40,7 @@ export default function JsonYamlGuide() {
       relatedGuides={[
         { label: "JSON formatting basics", to: "/guides/json-formatting" },
         { label: "cURL to fetch and axios", to: "/guides/curl-to-fetch" },
+        { label: "YAML's Hidden Traps (deep dive)", to: "/guides/yaml-design-tradeoffs" },
       ]}
     >
       <p>
